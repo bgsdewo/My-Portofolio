@@ -8,7 +8,7 @@ Website portofolio pribadi sebagai **Full Stack Developer**, dibangun dengan **V
 | --- | --- |
 | [Vite](https://vite.dev) | Dev server super cepat (hot reload) & build untuk production |
 | [Tailwind CSS v4](https://tailwindcss.com) | Styling dengan utility class langsung di `index.html` |
-| [Three.js](https://threejs.org) | Scene 3D di hero: grafik kontribusi GitHub versi 3D (`src/js/hero.js`) |
+| [Three.js](https://threejs.org) | Scene 3D "Full Stack" di hero: lapisan Frontend / Backend / Database dengan aliran data (`src/js/stack-scene.js`) |
 | [GSAP](https://gsap.com) | Animasi intro, huruf judul, tombol magnetik, cahaya kursor |
 | [Lenis](https://lenis.darkroom.engineering) | Smooth scroll |
 
@@ -57,7 +57,8 @@ npm run preview
     ├── styles/main.css   # Token desain Tailwind (warna, font, animasi) + komponen kecil
     └── js/
         ├── app.js        # Tema, navbar, tabs, pagination, sertifikat, form, dll.
-        └── hero.js       # Three.js, GSAP & Lenis
+        ├── hero.js       # GSAP & Lenis, memuat scene 3D
+        └── stack-scene.js # Scene 3D "Full Stack" (Three.js)
 ```
 
 ## Styling (Tailwind)
@@ -72,7 +73,7 @@ npm run preview
 
 - Responsif (mobile-first), tema gelap/terang
 - Navbar sticky + highlight section aktif
-- Hero 3D interaktif: kotak kontribusi naik mengikuti kursor, gelombang, partikel, parallax
+- Hero 3D interaktif: stack Frontend / Backend / Database, paket data request/response, hover lapisan, parallax mouse & scroll
 - About dengan tab Pendidikan / Pengalaman / Sertifikat, grid foto, pagination kartu, panel detail sertifikat
 - Filter proyek, form kontak dengan validasi (membuka aplikasi email via `mailto`)
 - Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`

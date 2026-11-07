@@ -48,10 +48,9 @@ npx serve .
 | --- | --- |
 | Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `assets/js/main.js` |
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
-| Bio (masih lorem ipsum) | Section `#about` di `index.html` |
-| Foto galeri (rasio 4:5, mis. 800×1000) | Simpan di `assets/img/gallery/`, lalu ubah `src`, `alt` & caption di `#gallery` (`index.html`). Tambah/hapus `<figure class="slide">` sesuka hati. Durasi per foto: `DURATION` di `assets/js/main.js` |
+| Tab Pendidikan / Pengalaman / Sertifikat | Section `#about`: tiap tab (`#panel-edu`, `#panel-exp`, `#panel-cert`) punya galeri foto, judul, deskripsi & timeline sendiri |
+| Foto galeri (rasio 4:5, mis. 800×1000) | Simpan di `assets/img/gallery/` (mis. `edu-1.jpg`), lalu ubah `src`, `alt` & caption di panel terkait. Tambah/hapus `<figure class="slide">` sesuka hati. Durasi per foto: `DURATION` di `assets/js/main.js` |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
-| Pendidikan, pengalaman & sertifikat | Tab di section `#about` (`#panel-edu`, `#panel-exp`, `#panel-cert`) |
 | Warna aksen | Variabel `--accent` di `assets/css/style.css` |
 
 ## Deploy gratis

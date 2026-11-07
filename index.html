@@ -64,55 +64,51 @@
         <div class="glow glow-2"></div>
       </div>
 
+      <!-- Scene 3D: grafik kontribusi GitHub versi 3D (lihat assets/js/hero.js) -->
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-fade" aria-hidden="true"></div>
+
       <div class="container hero-inner">
         <div class="hero-text">
-          <p class="status-pill reveal">
+          <p class="status-pill" data-hero>
             <span class="status-dot"></span> Terbuka untuk peluang baru
           </p>
-          <p class="hero-greet reveal">Halo, saya</p>
-          <h1 class="hero-title reveal">Bagus Sadewo</h1>
-          <h2 class="hero-role reveal">
+          <p class="hero-greet" data-hero>Halo, saya</p>
+          <h1 class="hero-title" id="hero-title" aria-label="Bagus Sadewo">
+            <span class="word">Bagus</span> <span class="word accent-word">Sadewo</span>
+          </h1>
+          <h2 class="hero-role" data-hero>
             <span class="mono">&gt;</span> <span id="typed">Full Stack Developer</span><span class="caret" aria-hidden="true">_</span>
           </h2>
-          <p class="hero-desc reveal">
+          <p class="hero-desc" data-hero>
             Saya membangun aplikasi web end-to-end — dari antarmuka yang rapi dan responsif
             hingga API dan database yang andal. Berbasis di Jakarta, Indonesia.
           </p>
-          <div class="hero-cta reveal">
-            <a href="#projects" class="btn btn-primary">
-              Lihat Proyek
+          <div class="hero-cta" data-hero>
+            <a href="#projects" class="btn btn-primary magnetic">
+              <span>Lihat Proyek</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+            <a href="#contact" class="btn btn-ghost magnetic"><span>Hubungi Saya</span></a>
           </div>
-          <ul class="hero-social reveal" aria-label="Media sosial">
+          <ul class="hero-social" data-hero aria-label="Media sosial">
             <li><a href="https://github.com/bgsdewo" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></li>
             <li><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a></li>
             <li><a href="mailto:email@contoh.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a></li>
           </ul>
         </div>
-
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="code-card">
-            <div class="code-card-head">
-              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-              <span class="code-file">developer.js</span>
-            </div>
-<pre class="code-body"><code><span class="tk-k">const</span> <span class="tk-v">developer</span> = {
-  <span class="tk-p">name</span>: <span class="tk-s">'Bagus Sadewo'</span>,
-  <span class="tk-p">role</span>: <span class="tk-s">'Full Stack Developer'</span>,
-  <span class="tk-p">location</span>: <span class="tk-s">'Jakarta, ID'</span>,
-  <span class="tk-p">stack</span>: [<span class="tk-s">'React'</span>, <span class="tk-s">'Node.js'</span>, <span class="tk-s">'Laravel'</span>],
-  <span class="tk-p">coffee</span>: <span class="tk-n">Infinity</span>,
-  <span class="tk-f">build</span>() {
-    <span class="tk-k">return</span> <span class="tk-s">'ide → produk nyata'</span>;
-  },
-};</code></pre>
-          </div>
-        </div>
       </div>
 
-      <a href="#about" class="scroll-hint" aria-label="Gulir ke bawah"><span></span></a>
+      <p class="hero-caption" aria-hidden="true">
+        <span class="mono">contributions</span>.render(<span id="hero-year">2026</span>) <span class="caption-hint">— gerakkan kursor</span>
+      </p>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>React</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span><span>Express</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>Figma</span><span>JavaScript</span>
+          <span>React</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span><span>Express</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>Figma</span><span>JavaScript</span>
+        </div>
+      </div>
     </section>
 
     <!-- ===== ABOUT ===== -->
@@ -426,6 +422,13 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Library animasi (CDN): GSAP untuk motion, Lenis untuk smooth scroll.
+       Three.js dimuat otomatis oleh hero.js. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/hero.js" defer></script>
 </body>
 </html>

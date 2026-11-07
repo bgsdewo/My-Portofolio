@@ -54,7 +54,8 @@
   onScroll();
 
   backToTop.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (window.lenis) window.lenis.scrollTo(0);
+    else window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   });
 
   /* ---------- Scroll reveal (dengan stagger per grup) ---------- */

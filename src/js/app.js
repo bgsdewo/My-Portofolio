@@ -428,6 +428,51 @@
     else smallScreen.addListener(onBreakpoint);
   });
 
+  /* ---------- Sertifikat: marquee tanpa henti ----------
+     Satu "set" = kartu asli di HTML. Set digandakan secukupnya untuk menutup
+     lebar area + satu set lagi, lalu track digeser sejauh 1 set (--loop). */
+  var SPEED = 40; // px per detik
+  document.querySelectorAll('.cert-marquee').forEach(function (box) {
+    var track = box.querySelector('.cert-track');
+    var originals = Array.prototype.slice.call(track.children);
+
+    function build() {
+      Array.prototype.slice.call(track.querySelectorAll('[data-clone]')).forEach(function (n) { n.remove(); });
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      var setWidth = originals.reduce(function (sum, el) { return sum + el.offsetWidth + gap; }, 0);
+      if (!setWidth) return; // tab masih tersembunyi
+      var copies = Math.ceil(box.clientWidth / setWidth) + 1;
+      for (var c = 0; c < copies; c++) {
+        originals.forEach(function (el) {
+          var clone = el.cloneNode(true);
+          clone.setAttribute('data-clone', '');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.querySelectorAll('a').forEach(function (a) { a.tabIndex = -1; });
+          clone.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+          track.appendChild(clone);
+        });
+      }
+      track.style.setProperty('--loop', setWidth + 'px');
+      track.style.setProperty('--dur', (setWidth / SPEED) + 's');
+    }
+
+    // Dibangun saat tab Sertifikat pertama kali terlihat & saat ukuran berubah
+    if ('ResizeObserver' in window) {
+      var lastW = 0;
+      new ResizeObserver(function () {
+        if (box.clientWidth && box.clientWidth !== lastW) { lastW = box.clientWidth; build(); }
+      }).observe(box);
+    } else {
+      build();
+    }
+    // Hemat: jeda animasi saat tidak terlihat
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        box.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+      }).observe(box);
+    }
+  });
+
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */
   var tabList = document.querySelector('.tabs');
   if (tabList) {

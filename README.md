@@ -50,7 +50,7 @@ npx serve .
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Tab Pendidikan / Pengalaman / Sertifikat | Section `#about`: tiap tab (`#panel-edu`, `#panel-exp`, `#panel-cert`) punya konten sendiri. Kartu tampil dalam grid; tambah kartu dengan menyalin `<li class="journey-card">` / `<li class="cert-card">`. Jumlah kartu per halaman: atribut `data-per-page` (desktop) & `data-per-page-sm` (HP) |
 | Foto (grid 4 foto di kanan tiap tab) | Simpan di `assets/img/gallery/` (mis. `edu-1.jpg`), lalu ganti `src`, `alt` & label di `<ul class="photo-grid">` pada panel terkait. Foto 1–4 otomatis tersusun selang-seling |
-| Sertifikat | Gambar di `assets/img/certificates/` (landscape, lebar 1400px). Di `#panel-cert`: salin satu `<li class="journey-card">` (kiri) **dan** satu `<li class="photo-tile">` di `#cert-photos` (kanan) dengan urutan yang sama — grid gambar ikut berganti halaman |
+| Sertifikat | Gambar di `assets/img/certificates/` (landscape, lebar 1400px). Di `#panel-cert`, salin satu `<li class="journey-card cert-item">` lalu ganti atribut `data-img`, `data-date`, `data-title`, `data-desc`, `data-code` (kode verifikasi) & `data-until`. Panel detail di kanan terisi otomatis saat kartu diklik |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
 | Warna aksen | Variabel `--accent` di `assets/css/style.css` |
 

@@ -241,6 +241,39 @@
     form.reset();
   });
 
+  /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */
+  var tabList = document.querySelector('.tabs');
+  if (tabList) {
+    var tabs = Array.prototype.slice.call(tabList.querySelectorAll('[role="tab"]'));
+    var indicator = tabList.querySelector('.tab-indicator');
+
+    function selectTab(tab, focus) {
+      tabs.forEach(function (t, i) {
+        var active = t === tab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', String(active));
+        t.tabIndex = active ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        panel.hidden = !active;
+        panel.classList.toggle('active', active);
+        if (active) indicator.style.transform = 'translateX(' + i * 100 + '%)';
+      });
+      if (focus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { selectTab(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (e.key === 'Home') next = tabs[0];
+        if (e.key === 'End') next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); selectTab(next, true); }
+      });
+    });
+  }
+
   /* ---------- Tahun di footer ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

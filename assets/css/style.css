@@ -651,7 +651,10 @@ html.lenis, html.lenis body { height: auto; }
 .about-text p { margin-bottom: 1.1rem; color: var(--text-muted); }
 .about-text .about-lead { font-size: 1.15rem; color: var(--heading); font-weight: 500; }
 
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.75rem 0 2.5rem; }
+.about-head { display: grid; gap: 1.5rem; margin-bottom: 2.5rem; }
+.about-head .section-head { margin-bottom: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
 .stat {
   text-align: center;
   padding: 1rem .5rem;
@@ -674,8 +677,9 @@ html.lenis, html.lenis body { height: auto; }
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 560px;
   padding: .3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -710,7 +714,28 @@ html.lenis, html.lenis body { height: auto; }
 }
 @media (max-width: 420px) { .tab svg { display: none; } }
 
-.tab-panel.active { animation: panelIn .5s var(--ease); }
+.tab-panel.active .about-side { animation: panelIn .6s var(--ease) both; }
+.tab-panel.active .about-main { animation: panelIn .6s var(--ease) .1s both; }
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--heading);
+  margin-bottom: 1rem;
+}
+.panel-title svg {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border-radius: 12px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  flex-shrink: 0;
+}
+.about-main .timeline { margin-top: 1.75rem; }
 @keyframes panelIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
@@ -1009,6 +1034,7 @@ html.lenis, html.lenis body { height: auto; }
   .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
   .about-grid { grid-template-columns: 340px 1fr; gap: 4.5rem; align-items: start; }
+  .about-head { grid-template-columns: 1fr minmax(0, 470px); align-items: end; gap: 3rem; }
   .about-side { position: sticky; top: calc(var(--nav-h) + 2rem); }
   .contact-grid { grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }
   .section { padding: 7rem 0; }

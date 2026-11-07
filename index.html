@@ -247,23 +247,35 @@
 
         <!-- ----- Panel: Sertifikat ----- -->
         <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
-          <div class="about-grid">
+          <div class="about-grid about-grid--wide">
             <aside class="about-side">
-              <!-- Foto Sertifikat: simpan di assets/img/gallery/ (rasio 4:5, mis. 800×1000) -->
-              <div class="gallery" role="region" aria-roledescription="carousel" aria-label="Galeri foto sertifikat">
+              <!-- Gambar sertifikat: assets/img/certificates/ (landscape, 1400px) -->
+              <div class="gallery gallery--landscape" role="region" aria-roledescription="carousel" aria-label="Galeri sertifikat">
                 <div class="gallery-track">
                   <figure class="slide active">
-                    <img src="assets/img/gallery/cert-1.svg" alt="Sertifikat milik Bagus" loading="lazy" />
-                    <figcaption>Sertifikat</figcaption>
+                    <img src="assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
+                    <figcaption>AJAX &amp; Web API</figcaption>
                   </figure>
                   <figure class="slide">
-                    <img src="assets/img/gallery/cert-2.svg" alt="Bagus saat mengikuti pelatihan" loading="lazy" />
-                    <figcaption>Workshop</figcaption>
+                    <img src="assets/img/certificates/cp-javascript-async.jpg" alt="Sertifikat CodePolitan: Belajar JavaScript Asynchronous" loading="lazy" />
+                    <figcaption>JavaScript Async</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/certificates/cp-dasar-css.jpg" alt="Sertifikat CodePolitan: Belajar Dasar CSS" loading="lazy" />
+                    <figcaption>Dasar CSS</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/certificates/cp-algoritma-dasar.jpg" alt="Sertifikat CodePolitan: Algoritma dan Pemrograman Dasar" loading="lazy" />
+                    <figcaption>Algoritma</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/certificates/cp-terminal-cmd.jpg" alt="Sertifikat CodePolitan: Belajar Menggunakan Terminal atau CMD untuk Development" loading="lazy" />
+                    <figcaption>Terminal / CMD</figcaption>
                   </figure>
                 </div>
-                <button class="gallery-nav prev" aria-label="Foto sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-                <button class="gallery-nav next" aria-label="Foto berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
-                <div class="gallery-dots" role="group" aria-label="Pilih foto"></div>
+                <button class="gallery-nav prev" aria-label="Sertifikat sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="gallery-nav next" aria-label="Sertifikat berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                <div class="gallery-dots" role="group" aria-label="Pilih sertifikat"></div>
                 <span class="gallery-count mono" aria-live="polite"></span>
               </div>
             </aside>
@@ -271,15 +283,64 @@
             <div class="about-main">
               <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
               <div class="about-text">
-                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan kursus, bootcamp, atau sertifikasi yang sudah kamu selesaikan.</p>
-                <p>Excepteur sint occaecat cupidatat non proident. Misalnya: skill baru yang didapat dan bagaimana kamu menerapkannya di proyek.</p>
+                <p class="about-lead">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
+                <p>Setiap sertifikat bisa diverifikasi langsung melalui tautan resmi CodePolitan.</p>
               </div>
               <ol class="timeline">
                 <li class="timeline-item">
-                  <span class="timeline-date">2024</span>
-                  <h4>Full Stack Web Development</h4>
-                  <p class="timeline-org">Nama Platform Kursus</p>
-                  <p>Menyelesaikan kurikulum front-end, back-end, dan deployment.</p>
+                  <span class="timeline-date">15 Mei 2024</span>
+                  <h4>Belajar AJAX dan Web API</h4>
+                  <p class="timeline-org">CodePolitan · Kelas Online</p>
+                  <p>Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API.</p>
+                  <div class="timeline-links">
+                    <a href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener">Lihat sertifikat</a>
+                    <a href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
+                    <span>Berlaku s.d. 15 Mei 2027</span>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">13 Mei 2024</span>
+                  <h4>Belajar JavaScript Asynchronous</h4>
+                  <p class="timeline-org">CodePolitan · Kelas Online</p>
+                  <p>Konsep asynchronous di JavaScript: callback, Promise, dan async/await.</p>
+                  <div class="timeline-links">
+                    <a href="assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener">Lihat sertifikat</a>
+                    <a href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener">Verifikasi ↗</a>
+                    <span>Berlaku s.d. 13 Mei 2027</span>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">20 Februari 2024</span>
+                  <h4>Belajar Dasar CSS</h4>
+                  <p class="timeline-org">CodePolitan · Kelas Online</p>
+                  <p>Dasar styling halaman web dengan CSS.</p>
+                  <div class="timeline-links">
+                    <a href="assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener">Lihat sertifikat</a>
+                    <a href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener">Verifikasi ↗</a>
+                    <span>Berlaku s.d. 19 Februari 2027</span>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">15 Februari 2024</span>
+                  <h4>Algoritma dan Pemrograman Dasar</h4>
+                  <p class="timeline-org">CodePolitan · Kelas Online</p>
+                  <p>Fondasi logika pemrograman dan algoritma.</p>
+                  <div class="timeline-links">
+                    <a href="assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener">Lihat sertifikat</a>
+                    <a href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener">Verifikasi ↗</a>
+                    <span>Berlaku s.d. 14 Februari 2027</span>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">15 Februari 2024</span>
+                  <h4>Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                  <p class="timeline-org">CodePolitan · Kelas Online</p>
+                  <p>Menggunakan terminal/CMD untuk alur kerja development sehari-hari.</p>
+                  <div class="timeline-links">
+                    <a href="assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener">Lihat sertifikat</a>
+                    <a href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener">Verifikasi ↗</a>
+                    <span>Berlaku s.d. 14 Februari 2027</span>
+                  </div>
                 </li>
               </ol>
             </div>

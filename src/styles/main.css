@@ -282,6 +282,98 @@
   .tab-panel.active .panel-main { animation: var(--animate-panel-in); }
   .tab-panel.active .panel-side { animation: var(--animate-panel-in); animation-delay: .1s; }
 
+  /* ---- Skills: kartu spotlight ----
+     --mx/--my diisi JS (posisi kursor relatif kartu). Lapisan ::before = cahaya
+     di permukaan, ::after = garis tepi yang menyala di dekat kursor. */
+  .spot-card {
+    position: relative;
+    border-radius: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transform-style: preserve-3d;
+    transition: transform .4s var(--ease-expo), box-shadow .4s, border-color .4s;
+    will-change: transform;
+  }
+  .spot-card::before,
+  .spot-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  .spot-card::before {
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 13%, transparent), transparent 45%);
+  }
+  .spot-card::after {
+    padding: 1px;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 60%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .spot-grid:hover .spot-card::after { opacity: .9; }  /* tepi kartu tetangga ikut menyala */
+  .spot-card:hover::before { opacity: 1; }
+  .spot-card:hover { box-shadow: var(--shadow-card); }
+
+  .skill-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .55rem;
+    padding: .9rem .4rem .75rem;
+    text-align: center;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+    transition: transform .35s var(--ease-expo), border-color .3s, background-color .3s;
+  }
+  .skill-logo {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 12px;
+    color: var(--muted);
+    background: var(--bg);
+    transition: color .3s, box-shadow .3s, transform .35s var(--ease-expo);
+  }
+  .skill-logo svg { width: 1.4rem; height: 1.4rem; }
+  .skill-tile:hover {
+    transform: translateY(-4px) translateZ(20px);
+    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+    background: color-mix(in srgb, var(--brand) 9%, var(--surface));
+  }
+  .skill-tile:hover .skill-logo {
+    color: var(--brand);
+    transform: scale(1.12) rotate(-6deg);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand) 40%, transparent), 0 8px 24px -6px color-mix(in srgb, var(--brand) 70%, transparent);
+  }
+  /* Kartu lebar (desktop): tile horizontal, logo di kiri */
+  @media (width >= 56.25rem) {
+    .tiles-wide .skill-tile { flex-direction: row; gap: .8rem; padding: .8rem 1rem; text-align: left; }
+    .tiles-wide .skill-tile > span:last-child { font-size: .9rem; }
+  }
+  /* Di layar sentuh tidak ada hover: tampilkan warna brand langsung */
+  @media (hover: none) { .skill-logo { color: var(--brand); } }
+
+  .learn-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .35rem .8rem;
+    font-size: .82rem;
+    font-weight: 500;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    transition: border-color .3s, color .3s;
+  }
+  .learn-chip svg { width: .95rem; height: .95rem; color: var(--brand); }
+  .learn-chip:hover { border-color: var(--brand); color: var(--heading); }
+
   /* Pagination & seleksi kartu */
   .card-grid > .is-hidden,
   .photo-grid > .is-hidden { display: none; }
@@ -325,6 +417,10 @@
     transition-delay: var(--delay, 0s);
   }
   .js .reveal.visible { opacity: 1; transform: none; }
+  /* Kartu skills: tilt harus responsif (tanpa delay reveal) */
+  .js .spot-card.reveal {
+    transition: opacity .8s var(--ease-expo) var(--delay, 0s), transform .45s var(--ease-expo), box-shadow .4s, border-color .4s;
+  }
 
   /* Lenis smooth scroll */
   html.lenis, html.lenis body { height: auto; }

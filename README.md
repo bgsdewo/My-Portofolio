@@ -49,8 +49,8 @@ npx serve .
 | Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `assets/js/main.js` |
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Tab Pendidikan / Pengalaman / Sertifikat | Section `#about`: tiap tab (`#panel-edu`, `#panel-exp`, `#panel-cert`) punya konten sendiri. Kartu tampil dalam grid; tambah kartu dengan menyalin `<li class="journey-card">` / `<li class="cert-card">`. Jumlah kartu per halaman: atribut `data-per-page` (desktop) & `data-per-page-sm` (HP) |
-| Foto galeri (rasio 4:5, mis. 800×1000) | Simpan di `assets/img/gallery/` (mis. `edu-1.jpg`), lalu ubah `src`, `alt` & caption di panel terkait. Tambah/hapus `<figure class="slide">` sesuka hati. Durasi per foto: `DURATION` di `assets/js/main.js` |
-| Sertifikat | Gambar di `assets/img/certificates/` (landscape, lebar 1400px), lalu salin satu `<li class="cert-card">` di `#panel-cert` dan ganti gambar, judul, tanggal & link verifikasi |
+| Foto (grid 4 foto di kanan tiap tab) | Simpan di `assets/img/gallery/` (mis. `edu-1.jpg`), lalu ganti `src`, `alt` & label di `<ul class="photo-grid">` pada panel terkait. Foto 1–4 otomatis tersusun selang-seling |
+| Sertifikat | Gambar di `assets/img/certificates/` (landscape, lebar 1400px). Di `#panel-cert`: salin satu `<li class="journey-card">` (kiri) **dan** satu `<li class="photo-tile">` di `#cert-photos` (kanan) dengan urutan yang sama — grid gambar ikut berganti halaman |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
 | Warna aksen | Variabel `--accent` di `assets/css/style.css` |
 

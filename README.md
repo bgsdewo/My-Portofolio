@@ -1,59 +1,97 @@
 # Portofolio — Bagus Sadewo
 
-Website portofolio pribadi sebagai **Full Stack Developer**. Dibuat dengan HTML, CSS, dan JavaScript — tanpa build tool. Library animasi dimuat dari CDN.
+Website portofolio pribadi sebagai **Full Stack Developer**, dibangun dengan **Vite + Tailwind CSS v4** dan JavaScript.
 
 ## Tech
 
-| Library | Fungsi |
+| Tools / Library | Fungsi |
 | --- | --- |
-| [Three.js](https://threejs.org) | Scene 3D di hero: grafik kontribusi GitHub versi 3D (`assets/js/hero.js`) |
+| [Vite](https://vite.dev) | Dev server super cepat (hot reload) & build untuk production |
+| [Tailwind CSS v4](https://tailwindcss.com) | Styling dengan utility class langsung di `index.html` |
+| [Three.js](https://threejs.org) | Scene 3D di hero: grafik kontribusi GitHub versi 3D (`src/js/hero.js`) |
 | [GSAP](https://gsap.com) | Animasi intro, huruf judul, tombol magnetik, cahaya kursor |
 | [Lenis](https://lenis.darkroom.engineering) | Smooth scroll |
 
-Kalau CDN gagal dimuat atau pengunjung mengaktifkan *reduce motion*, halaman tetap tampil normal tanpa efek tersebut.
+Semua library diinstal lewat npm (tidak lagi dari CDN). Three.js dimuat terpisah (lazy) supaya halaman tetap cepat tampil.
 
-## Fitur
+## Menjalankan di lokal
 
-- Responsif (mobile-first)
-- Toggle tema gelap/terang (tersimpan di browser, mengikuti preferensi sistem)
-- Navbar sticky + highlight section aktif
-- Hero 3D interaktif: kotak kontribusi naik mengikuti kursor, gelombang, partikel, parallax
-- Animasi halus saat scroll, efek mengetik, counter statistik, marquee tech stack
-- Filter proyek (Full Stack / Frontend / Backend)
-- Form kontak dengan validasi (membuka aplikasi email via `mailto`)
-- Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`
+Butuh [Node.js](https://nodejs.org) versi 20 ke atas.
+
+```bash
+npm install
+```
+
+```bash
+npm run dev
+```
+
+Buka alamat yang muncul di terminal (biasanya http://localhost:5173). Setiap kali file disimpan, browser otomatis ter-update.
+
+> Sejak memakai Vite, `index.html` **tidak bisa lagi dibuka dengan klik dua kali** — selalu jalankan lewat `npm run dev`.
+
+Build untuk production (hasilnya di folder `dist/`):
+
+```bash
+npm run build
+```
+
+```bash
+npm run preview
+```
 
 ## Struktur
 
 ```
 .
-├── index.html
-└── assets
-    ├── css/style.css
-    ├── js/main.js
-    └── img/          # favicon & gambar proyek (placeholder SVG)
+├── index.html            # Markup + utility class Tailwind
+├── vite.config.js
+├── package.json
+├── public/
+│   └── assets/img/       # Gambar (disalin apa adanya saat build)
+│       ├── certificates/ # Sertifikat
+│       ├── gallery/      # Foto tab Pendidikan & Pengalaman
+│       └── project-*.svg # Gambar proyek (placeholder)
+└── src/
+    ├── main.js           # Entry point
+    ├── styles/main.css   # Token desain Tailwind (warna, font, animasi) + komponen kecil
+    └── js/
+        ├── app.js        # Tema, navbar, tabs, pagination, sertifikat, form, dll.
+        └── hero.js       # Three.js, GSAP & Lenis
 ```
 
-## Menjalankan di lokal
+## Styling (Tailwind)
 
-Cukup buka `index.html` di browser. Atau jalankan server lokal:
+- Hampir semua styling ditulis sebagai class di `index.html`, mis. `rounded-full bg-accent px-4 text-on-accent`.
+- Warna tema ada di `src/styles/main.css` (`--accent`, `--bg`, dll.) dan tersedia sebagai class: `bg-bg`, `bg-surface`, `text-heading`, `text-muted`, `border-line`, `text-accent`, `bg-accent-soft`, …
+- Ganti warna aksen cukup di satu tempat: variabel `--accent` (dark & light).
+- Varian `dark:` / `light:` mengikuti tombol tema (atribut `data-theme`).
+- Komponen yang dipakai berulang: `.btn`, `.btn-primary`, `.btn-ghost`, `.section-tag`, `.section-title`, `.date-chip`.
 
-```bash
-npx serve .
-```
+## Fitur
+
+- Responsif (mobile-first), tema gelap/terang
+- Navbar sticky + highlight section aktif
+- Hero 3D interaktif: kotak kontribusi naik mengikuti kursor, gelombang, partikel, parallax
+- About dengan tab Pendidikan / Pengalaman / Sertifikat, grid foto, pagination kartu, panel detail sertifikat
+- Filter proyek, form kontak dengan validasi (membuka aplikasi email via `mailto`)
+- Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`
 
 ## Yang perlu kamu ganti
 
 | Apa | Di mana |
 | --- | --- |
-| Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `assets/js/main.js` |
+| Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `src/js/app.js` |
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
-| Tab Pendidikan / Pengalaman / Sertifikat | Section `#about`: tiap tab (`#panel-edu`, `#panel-exp`, `#panel-cert`) punya konten sendiri. Kartu tampil dalam grid; tambah kartu dengan menyalin `<li class="journey-card">` / `<li class="cert-card">`. Jumlah kartu per halaman: atribut `data-per-page` (desktop) & `data-per-page-sm` (HP) |
-| Foto (grid 4 foto di kanan tiap tab) | Simpan di `assets/img/gallery/` (mis. `edu-1.jpg`), lalu ganti `src`, `alt` & label di `<ul class="photo-grid">` pada panel terkait. Foto 1–4 otomatis tersusun selang-seling |
-| Sertifikat | Gambar di `assets/img/certificates/` (landscape, lebar 1400px). Di `#panel-cert`, salin satu `<li class="journey-card cert-item">` lalu ganti atribut `data-img`, `data-date`, `data-title`, `data-desc`, `data-code` (kode verifikasi) & `data-until`. Panel detail di kanan terisi otomatis saat kartu diklik |
+| Deskripsi tab (masih lorem ipsum) | Section `#about` di `index.html` |
+| Foto tab Pendidikan / Pengalaman | Simpan di `public/assets/img/gallery/`, lalu ganti `src`, `alt` & label di `<ul class="photo-grid …">` |
+| Sertifikat | Gambar di `public/assets/img/certificates/`, lalu salin satu `<li class="cert-item …">` di `#panel-cert` dan ganti atribut `data-img`, `data-date`, `data-title`, `data-desc`, `data-code` |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
-| Warna aksen | Variabel `--accent` di `assets/css/style.css` |
+| Jumlah kartu per halaman | Atribut `data-per-page` / `data-per-page-sm` pada `<ol class="card-grid …">` |
 
 ## Deploy gratis
 
-Aktifkan **GitHub Pages**: Settings → Pages → Source: branch utama, folder `/ (root)`.
+Karena sekarang perlu proses build, deploy bisa lewat:
+
+- **Vercel / Netlify**: hubungkan repo, build command `npm run build`, output folder `dist`.
+- **GitHub Pages**: jalankan `npm run build` lalu publish isi folder `dist/` (bisa diotomatiskan dengan GitHub Actions).

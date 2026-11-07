@@ -6,13 +6,11 @@
   <title>Bagus Sadewo — Full Stack Developer</title>
   <meta name="description" content="Portofolio Bagus Sadewo, Full Stack Developer dari Jakarta, Indonesia." />
   <meta name="theme-color" content="#0b1120" />
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- Terapkan tema tersimpan sebelum render agar tidak berkedip -->
   <script>
@@ -24,30 +22,33 @@
       } catch (e) {}
     })();
   </script>
+
+  <!-- Entry Vite: Tailwind CSS + JavaScript (lihat src/main.js) -->
+  <script type="module" src="/src/main.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <a class="absolute -top-24 left-4 z-[200] rounded-lg bg-accent px-4 py-2.5 font-semibold text-on-accent focus:top-4" href="#main">Lewati ke konten</a>
 
   <!-- ===== NAVBAR ===== -->
-  <header class="navbar" id="navbar">
-    <nav class="container nav-inner" aria-label="Navigasi utama">
-      <a href="#home" class="logo" aria-label="Beranda">
-        <span class="logo-bracket">&lt;</span>BS<span class="logo-bracket">/&gt;</span>
+  <header id="navbar" class="navbar fixed inset-x-0 top-0 z-[100] h-[68px] border-b border-transparent transition-colors duration-300 [&.scrolled]:border-line [&.scrolled]:bg-nav [&.scrolled]:backdrop-blur-xl">
+    <nav class="wrap flex h-full items-center justify-between gap-4" aria-label="Navigasi utama">
+      <a href="#home" class="font-mono text-xl font-medium tracking-tight text-heading" aria-label="Beranda">
+        <span class="text-accent">&lt;</span>BS<span class="text-accent">/&gt;</span>
       </a>
 
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#about" class="nav-link">Tentang</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Proyek</a></li>
-        <li><a href="#contact" class="nav-link">Kontak</a></li>
+      <ul id="nav-links" class="invisible fixed inset-x-0 top-[68px] flex -translate-y-3 flex-col gap-1 border-b border-line bg-bg px-5 pt-4 pb-6 opacity-0 shadow-card transition duration-300 ease-expo [&.open]:visible [&.open]:translate-y-0 [&.open]:opacity-100 lg:visible lg:static lg:translate-y-0 lg:flex-row lg:border-0 lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none">
+        <li><a href="#about" class="nav-link relative block rounded-lg px-2 py-3 font-medium text-muted transition-colors hover:text-accent [&.active]:text-accent lg:px-3.5 lg:py-2 lg:text-[.93rem]">Tentang</a></li>
+        <li><a href="#skills" class="nav-link relative block rounded-lg px-2 py-3 font-medium text-muted transition-colors hover:text-accent [&.active]:text-accent lg:px-3.5 lg:py-2 lg:text-[.93rem]">Skills</a></li>
+        <li><a href="#projects" class="nav-link relative block rounded-lg px-2 py-3 font-medium text-muted transition-colors hover:text-accent [&.active]:text-accent lg:px-3.5 lg:py-2 lg:text-[.93rem]">Proyek</a></li>
+        <li><a href="#contact" class="nav-link relative block rounded-lg px-2 py-3 font-medium text-muted transition-colors hover:text-accent [&.active]:text-accent lg:px-3.5 lg:py-2 lg:text-[.93rem]">Kontak</a></li>
       </ul>
 
-      <div class="nav-actions">
-        <button class="icon-btn" id="theme-toggle" aria-label="Ganti tema terang/gelap">
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" class="grid size-[42px] cursor-pointer place-items-center rounded-full border border-line bg-surface text-heading transition-colors hover:border-accent hover:text-accent [&>svg]:size-[19px]" aria-label="Ganti tema terang/gelap">
+          <svg class="light:hidden" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="dark:hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-links">
+        <button id="menu-toggle" class="burger relative grid size-[42px] cursor-pointer place-items-center rounded-full border border-line bg-surface text-heading transition-colors hover:border-accent hover:text-accent [&>svg]:size-[19px] lg:hidden" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-links">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -56,164 +57,160 @@
 
   <main id="main">
     <!-- ===== HERO ===== -->
-    <section class="hero" id="home">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="grid-overlay"></div>
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
+    <section id="home" class="relative flex min-h-svh items-center overflow-hidden pt-[calc(68px+2.5rem)] pb-28">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="hero-grid absolute inset-0"></div>
+        <div class="absolute top-[8%] -left-[120px] size-[380px] animate-float rounded-full bg-accent opacity-35 blur-[90px] light:opacity-20"></div>
+        <div class="absolute -right-[100px] bottom-0 size-[320px] animate-float rounded-full bg-accent-2 opacity-35 blur-[90px] [animation-delay:-7s] light:opacity-20"></div>
       </div>
 
-      <!-- Scene 3D: grafik kontribusi GitHub versi 3D (lihat assets/js/hero.js) -->
-      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-fade" aria-hidden="true"></div>
+      <!-- Scene 3D: grafik kontribusi GitHub versi 3D (lihat src/js/hero.js) -->
+      <canvas id="hero-canvas" class="absolute inset-0 size-full opacity-0 transition-opacity duration-[1200ms] [&.ready]:opacity-100" aria-hidden="true"></canvas>
+      <div class="hero-fade pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="status-pill" data-hero>
-            <span class="status-dot"></span> Terbuka untuk peluang baru
+      <div class="wrap relative z-[2]">
+        <div class="relative max-w-[660px]">
+          <p class="status-pill mb-6 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-3.5 py-1.5 text-[.82rem] font-medium text-accent" data-hero>
+            <span class="size-2 animate-pulse-dot rounded-full bg-accent"></span> Terbuka untuk peluang baru
           </p>
-          <p class="hero-greet" data-hero>Halo, saya</p>
-          <h1 class="hero-title" id="hero-title" aria-label="Bagus Sadewo">
-            <span class="word">Bagus</span> <span class="word accent-word">Sadewo</span>
+          <p class="font-mono text-[.95rem] text-accent" data-hero>Halo, saya</p>
+          <h1 id="hero-title" class="hero-title mt-1.5 mb-2.5 font-display text-[clamp(2.6rem,10vw,4.8rem)] leading-[1.05] font-bold tracking-[-.03em] text-heading" aria-label="Bagus Sadewo">
+            <span class="word inline-block whitespace-nowrap">Bagus</span> <span class="word text-shine inline-block whitespace-nowrap">Sadewo</span>
           </h1>
-          <h2 class="hero-role" data-hero>
-            <span class="mono">&gt;</span> <span id="typed">Full Stack Developer</span><span class="caret" aria-hidden="true">_</span>
+          <h2 class="hero-role min-h-[1.5em] font-display text-[clamp(1.25rem,4.5vw,1.9rem)] font-medium text-muted" data-hero>
+            <span class="font-mono text-accent">&gt;</span> <span id="typed">Full Stack Developer</span><span class="ml-0.5 animate-blink text-accent" aria-hidden="true">_</span>
           </h2>
-          <p class="hero-desc" data-hero>
+          <p class="hero-desc mt-5 mb-8 max-w-[540px] text-[1.05rem] text-muted" data-hero>
             Saya membangun aplikasi web end-to-end — dari antarmuka yang rapi dan responsif
             hingga API dan database yang andal. Berbasis di Jakarta, Indonesia.
           </p>
-          <div class="hero-cta" data-hero>
-            <a href="#projects" class="btn btn-primary magnetic">
+          <div class="hero-cta flex flex-wrap gap-3" data-hero>
+            <a href="#projects" class="btn btn-primary magnetic [&>*]:pointer-events-none">
               <span>Lihat Proyek</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#contact" class="btn btn-ghost magnetic"><span>Hubungi Saya</span></a>
+            <a href="#contact" class="btn btn-ghost magnetic [&>*]:pointer-events-none"><span>Hubungi Saya</span></a>
           </div>
-          <ul class="hero-social" data-hero aria-label="Media sosial">
-            <li><a href="https://github.com/bgsdewo" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></li>
-            <li><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a></li>
-            <li><a href="mailto:email@contoh.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a></li>
+          <ul class="hero-social mt-9 flex gap-3" data-hero aria-label="Media sosial">
+            <li><a href="https://github.com/bgsdewo" target="_blank" rel="noopener" aria-label="GitHub" class="grid size-[42px] place-items-center rounded-full border border-line text-muted transition duration-300 ease-expo hover:-translate-y-[3px] hover:border-accent hover:text-accent [&>svg]:size-[18px]"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="LinkedIn" class="grid size-[42px] place-items-center rounded-full border border-line text-muted transition duration-300 ease-expo hover:-translate-y-[3px] hover:border-accent hover:text-accent [&>svg]:size-[18px]"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a></li>
+            <li><a href="mailto:email@contoh.com" aria-label="Email" class="grid size-[42px] place-items-center rounded-full border border-line text-muted transition duration-300 ease-expo hover:-translate-y-[3px] hover:border-accent hover:text-accent [&>svg]:size-[18px]"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a></li>
           </ul>
         </div>
       </div>
 
-      <p class="hero-caption" aria-hidden="true">
-        <span class="mono">contributions</span>.render(<span id="hero-year">2026</span>) <span class="caption-hint">— gerakkan kursor</span>
+      <p class="hero-caption absolute right-5 bottom-[4.6rem] font-mono text-[.78rem] text-muted opacity-80" aria-hidden="true">
+        <span class="text-accent">contributions</span>.render(<span id="hero-year">2026</span>) <span class="hidden pointer-fine:inline">— gerakkan kursor</span>
       </p>
 
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>React</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span><span>Express</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>Figma</span><span>JavaScript</span>
-          <span>React</span><span>Node.js</span><span>Laravel</span><span>Tailwind CSS</span><span>Express</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>Figma</span><span>JavaScript</span>
+      <div class="marquee marquee-mask group absolute inset-x-0 bottom-0 overflow-hidden border-t border-line bg-bg/70 py-3.5 backdrop-blur-sm" aria-hidden="true">
+        <div class="marquee-track flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+          <span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">React</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Node.js</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Laravel</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Tailwind CSS</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Express</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">PostgreSQL</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">MongoDB</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Docker</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Figma</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">JavaScript</span>
+          <span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">React</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Node.js</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Laravel</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Tailwind CSS</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Express</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">PostgreSQL</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">MongoDB</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Docker</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">Figma</span><span class="inline-flex items-center gap-10 pr-10 font-display text-[.95rem] font-medium whitespace-nowrap text-muted">JavaScript</span>
         </div>
       </div>
     </section>
 
     <!-- ===== ABOUT (Pendidikan / Pengalaman / Sertifikat) =====
-         Layout: kiri = judul, deskripsi & kartu | garis tengah | kanan = grid foto.
-         Kartu dipaginasi otomatis (data-per-page / data-per-page-sm). -->
-    <section class="section" id="about">
-      <div class="container">
-        <header class="section-head section-head--center reveal">
+         Kiri: judul, deskripsi & kartu | garis tengah | kanan: grid foto / detail sertifikat.
+         Kartu dipaginasi otomatis (data-per-page). -->
+    <section id="about" class="py-22 lg:py-28">
+      <div class="wrap">
+        <header class="reveal mb-12 text-center">
           <span class="section-tag">01. Tentang Saya</span>
           <h2 class="section-title">Sedikit tentang saya</h2>
         </header>
 
-        <div class="tabs reveal" role="tablist" aria-label="Tentang saya" id="experience">
-          <button class="tab active" role="tab" id="tab-edu" aria-selected="true" aria-controls="panel-edu">
+        <div id="experience" class="tabs reveal relative mx-auto mb-12 grid max-w-[560px] grid-cols-3 rounded-full border border-line bg-surface p-[.3rem]" role="tablist" aria-label="Tentang saya">
+          <button class="tab relative z-[1] inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-2 py-2.5 text-[.88rem] font-semibold text-muted transition-colors hover:text-heading [&.active]:text-on-accent [&>svg]:size-4 [&>svg]:shrink-0 max-[420px]:[&>svg]:hidden active" role="tab" id="tab-edu" aria-selected="true" aria-controls="panel-edu">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             Pendidikan
           </button>
-          <button class="tab" role="tab" id="tab-exp" aria-selected="false" aria-controls="panel-exp" tabindex="-1">
+          <button class="tab relative z-[1] inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-2 py-2.5 text-[.88rem] font-semibold text-muted transition-colors hover:text-heading [&.active]:text-on-accent [&>svg]:size-4 [&>svg]:shrink-0 max-[420px]:[&>svg]:hidden" role="tab" id="tab-exp" aria-selected="false" aria-controls="panel-exp" tabindex="-1">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             Pengalaman
           </button>
-          <button class="tab" role="tab" id="tab-cert" aria-selected="false" aria-controls="panel-cert" tabindex="-1">
+          <button class="tab relative z-[1] inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-2 py-2.5 text-[.88rem] font-semibold text-muted transition-colors hover:text-heading [&.active]:text-on-accent [&>svg]:size-4 [&>svg]:shrink-0 max-[420px]:[&>svg]:hidden" role="tab" id="tab-cert" aria-selected="false" aria-controls="panel-cert" tabindex="-1">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>
             Sertifikat
           </button>
-          <span class="tab-indicator" aria-hidden="true"></span>
+          <span class="tab-indicator absolute inset-y-[.3rem] left-[.3rem] w-[calc((100%-.6rem)/3)] rounded-full bg-accent shadow-glow transition-transform duration-500 ease-expo" aria-hidden="true"></span>
         </div>
 
         <!-- ----- Panel: Pendidikan ----- -->
         <div class="tab-panel active" role="tabpanel" id="panel-edu" aria-labelledby="tab-edu">
-          <div class="about-split">
-            <div class="about-main">
-              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Perjalanan akademik</h3>
-              <div class="about-text">
-                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan latar belakang pendidikanmu di sini.</p>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Misalnya: alasan memilih jurusan, mata kuliah favorit, atau organisasi yang diikuti.</p>
-              </div>
-              <ol class="card-grid" data-paginate data-per-page="4">
-                <li class="journey-card">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-                    <span class="journey-date">2022 — 2026</span>
+          <div class="split-line relative grid items-start gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-20">
+            <div class="panel-main min-w-0">
+              <h3 class="mb-4 flex items-center gap-2.5 font-display text-2xl font-bold text-heading [&>svg]:size-10 [&>svg]:shrink-0 [&>svg]:rounded-xl [&>svg]:bg-accent-soft [&>svg]:p-[9px] [&>svg]:text-accent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Perjalanan akademik</h3>
+              <p class="mb-4 text-lg font-medium text-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan latar belakang pendidikanmu di sini.</p>
+              <p class="mb-4 text-muted">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Misalnya: alasan memilih jurusan, mata kuliah favorit, atau organisasi yang diikuti.</p>
+              <ol class="card-grid mt-7 grid gap-4 sm:grid-cols-2" data-paginate data-per-page="4">
+                <li class="card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+                    <span class="date-chip">2022 — 2026</span>
                   </div>
-                  <h4>S1 Teknik Informatika</h4>
-                  <p class="journey-org">Nama Universitas</p>
-                  <p class="journey-desc">Fokus pada rekayasa perangkat lunak dan pengembangan web. IPK: x.xx</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading">S1 Teknik Informatika</h4>
+                  <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">Nama Universitas</p>
+                  <p class="text-[.9rem] text-muted">Fokus pada rekayasa perangkat lunak dan pengembangan web. IPK: x.xx</p>
                 </li>
-                <li class="journey-card">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-                    <span class="journey-date">2019 — 2022</span>
+                <li class="card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+                    <span class="date-chip">2019 — 2022</span>
                   </div>
-                  <h4>SMA / SMK — Jurusan</h4>
-                  <p class="journey-org">Nama Sekolah, Jakarta</p>
-                  <p class="journey-desc">Ceritakan singkat pencapaian atau kegiatan yang relevan.</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading">SMA / SMK — Jurusan</h4>
+                  <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">Nama Sekolah, Jakarta</p>
+                  <p class="text-[.9rem] text-muted">Ceritakan singkat pencapaian atau kegiatan yang relevan.</p>
                 </li>
               </ol>
             </div>
 
-            <!-- Foto Pendidikan: simpan di assets/img/gallery/ lalu ganti src, alt & label -->
-            <ul class="photo-grid" aria-label="Foto pendidikan">
-              <li class="photo-tile"><img src="assets/img/gallery/edu-1.svg" alt="Bagus di kampus" /><span>Kampus</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/edu-2.svg" alt="Bagus saat kuliah" /><span>Kelas</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/edu-3.svg" alt="Bagus saat wisuda" /><span>Wisuda</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/edu-4.svg" alt="Bagus saat kegiatan organisasi kampus" /><span>Organisasi</span></li>
+            <!-- Foto Pendidikan: simpan di public/assets/img/gallery/ lalu ganti src, alt & label -->
+            <ul class="photo-grid panel-side grid grid-cols-2 grid-rows-[repeat(9,44px)] gap-3.5 lg:min-h-[480px] lg:grid-rows-[repeat(9,minmax(44px,1fr))]" aria-label="Foto pendidikan">
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/edu-1.svg" alt="Bagus di kampus" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Kampus</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/edu-2.svg" alt="Bagus saat kuliah" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Kelas</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/edu-3.svg" alt="Bagus saat wisuda" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Wisuda</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/edu-4.svg" alt="Bagus saat kegiatan organisasi kampus" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Organisasi</span></li>
             </ul>
           </div>
         </div>
 
         <!-- ----- Panel: Pengalaman ----- -->
         <div class="tab-panel" role="tabpanel" id="panel-exp" aria-labelledby="tab-exp" hidden>
-          <div class="about-split">
-            <div class="about-main">
-              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Pengalaman kerja</h3>
-              <div class="about-text">
-                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan pengalaman kerja dan proyek nyata yang pernah kamu tangani.</p>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Misalnya: peran kamu di tim, masalah yang diselesaikan, dan dampaknya.</p>
-              </div>
-              <ol class="card-grid" data-paginate data-per-page="4">
-                <li class="journey-card">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
-                    <span class="journey-date">2025 — Sekarang</span>
+          <div class="split-line relative grid items-start gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-20">
+            <div class="panel-main min-w-0">
+              <h3 class="mb-4 flex items-center gap-2.5 font-display text-2xl font-bold text-heading [&>svg]:size-10 [&>svg]:shrink-0 [&>svg]:rounded-xl [&>svg]:bg-accent-soft [&>svg]:p-[9px] [&>svg]:text-accent"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Pengalaman kerja</h3>
+              <p class="mb-4 text-lg font-medium text-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan pengalaman kerja dan proyek nyata yang pernah kamu tangani.</p>
+              <p class="mb-4 text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Misalnya: peran kamu di tim, masalah yang diselesaikan, dan dampaknya.</p>
+              <ol class="card-grid mt-7 grid gap-4 sm:grid-cols-2" data-paginate data-per-page="4">
+                <li class="card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                    <span class="date-chip">2025 — Sekarang</span>
                   </div>
-                  <h4>Full Stack Developer (Freelance)</h4>
-                  <p class="journey-org">Remote</p>
-                  <p class="journey-desc">Membangun aplikasi web untuk klien UMKM: landing page, sistem kasir, dan dashboard admin.</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading">Full Stack Developer (Freelance)</h4>
+                  <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">Remote</p>
+                  <p class="text-[.9rem] text-muted">Membangun aplikasi web untuk klien UMKM: landing page, sistem kasir, dan dashboard admin.</p>
                 </li>
-                <li class="journey-card">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
-                    <span class="journey-date">2024 — 2025</span>
+                <li class="card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                    <span class="date-chip">2024 — 2025</span>
                   </div>
-                  <h4>Web Developer Intern</h4>
-                  <p class="journey-org">PT Nama Perusahaan, Jakarta</p>
-                  <p class="journey-desc">Mengembangkan fitur internal dengan Laravel &amp; MySQL, serta memperbaiki bug dan performa halaman.</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading">Web Developer Intern</h4>
+                  <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">PT Nama Perusahaan, Jakarta</p>
+                  <p class="text-[.9rem] text-muted">Mengembangkan fitur internal dengan Laravel &amp; MySQL, serta memperbaiki bug dan performa halaman.</p>
                 </li>
               </ol>
             </div>
 
-            <!-- Foto Pengalaman: simpan di assets/img/gallery/ lalu ganti src, alt & label -->
-            <ul class="photo-grid" aria-label="Foto pengalaman">
-              <li class="photo-tile"><img src="assets/img/gallery/exp-1.svg" alt="Bagus sedang ngoding" loading="lazy" /><span>Ngoding</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/exp-2.svg" alt="Bagus bersama tim" loading="lazy" /><span>Tim</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/exp-3.svg" alt="Bagus di tempat magang" loading="lazy" /><span>Kantor</span></li>
-              <li class="photo-tile"><img src="assets/img/gallery/exp-4.svg" alt="Bagus saat demo proyek" loading="lazy" /><span>Presentasi</span></li>
+            <!-- Foto Pengalaman: simpan di public/assets/img/gallery/ lalu ganti src, alt & label -->
+            <ul class="photo-grid panel-side grid grid-cols-2 grid-rows-[repeat(9,44px)] gap-3.5 lg:min-h-[480px] lg:grid-rows-[repeat(9,minmax(44px,1fr))]" aria-label="Foto pengalaman">
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/exp-1.svg" alt="Bagus sedang ngoding" loading="lazy" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Ngoding</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/exp-2.svg" alt="Bagus bersama tim" loading="lazy" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Tim</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/exp-3.svg" alt="Bagus di tempat magang" loading="lazy" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Kantor</span></li>
+              <li class="group relative overflow-hidden rounded-[14px] border border-line bg-surface"><img class="absolute inset-0 size-full animate-drift object-cover transition-transform duration-500 group-even:[animation-delay:-7s] group-hover:scale-[1.08] group-hover:[animation-play-state:paused]" src="/assets/img/gallery/exp-4.svg" alt="Bagus saat demo proyek" loading="lazy" /><span class="absolute bottom-3 left-3 z-[1] rounded-full bg-black/60 px-3 py-1 text-[.76rem] font-semibold text-white backdrop-blur-sm">Presentasi</span></li>
             </ul>
           </div>
         </div>
@@ -222,84 +219,77 @@
              Kiri: daftar sertifikat (klik untuk memilih) | Kanan: detail sertifikat terpilih.
              Data detail diambil dari atribut data-* di tiap kartu. -->
         <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
-          <div class="about-split">
-            <div class="about-main">
-              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
-              <div class="about-text">
-                <p class="about-lead">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
-                <p>Pilih sertifikat untuk melihat detail dan tautan verifikasinya.</p>
-              </div>
-              <ol class="card-grid" data-paginate data-per-page="4" id="cert-list">
-                <li class="journey-card cert-item is-selected"
-                    data-img="assets/img/certificates/cp-ajax-web-api.jpg" data-date="15 Mei 2024" data-title="Belajar AJAX dan Web API"
-                    data-desc="Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API." data-code="5AOSWKX" data-until="15 Mei 2027">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="journey-date">15 Mei 2024</span>
+          <div class="split-line relative grid items-start gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-20">
+            <div class="panel-main min-w-0">
+              <h3 class="mb-4 flex items-center gap-2.5 font-display text-2xl font-bold text-heading [&>svg]:size-10 [&>svg]:shrink-0 [&>svg]:rounded-xl [&>svg]:bg-accent-soft [&>svg]:p-[9px] [&>svg]:text-accent"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
+              <p class="mb-4 text-lg font-medium text-heading">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
+              <p class="mb-4 text-muted">Pilih sertifikat untuk melihat detail dan tautan verifikasinya.</p>
+              <ol id="cert-list" class="card-grid mt-7 grid gap-4 sm:grid-cols-2" data-paginate data-per-page="4">
+                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent is-selected"
+                    data-img="/assets/img/certificates/cp-ajax-web-api.jpg" data-date="15 Mei 2024" data-title="Belajar AJAX dan Web API" data-desc="Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API." data-code="5AOSWKX">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
+                    <span class="date-chip">15 Mei 2024</span>
                   </div>
-                  <h4><button type="button" class="cert-select" aria-pressed="true" aria-controls="cert-detail">Belajar AJAX dan Web API</button></h4>
-                  <p class="journey-org">CodePolitan · Kelas Online</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="true" aria-controls="cert-detail">Belajar AJAX dan Web API</button></h4>
+                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
                 </li>
-                <li class="journey-card cert-item"
-                    data-img="assets/img/certificates/cp-javascript-async.jpg" data-date="13 Mei 2024" data-title="Belajar JavaScript Asynchronous"
-                    data-desc="Konsep asynchronous di JavaScript: callback, Promise, dan async/await." data-code="HQ8YLNK" data-until="13 Mei 2027">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="journey-date">13 Mei 2024</span>
+                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
+                    data-img="/assets/img/certificates/cp-javascript-async.jpg" data-date="13 Mei 2024" data-title="Belajar JavaScript Asynchronous" data-desc="Konsep asynchronous di JavaScript: callback, Promise, dan async/await." data-code="HQ8YLNK">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
+                    <span class="date-chip">13 Mei 2024</span>
                   </div>
-                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar JavaScript Asynchronous</button></h4>
-                  <p class="journey-org">CodePolitan · Kelas Online</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar JavaScript Asynchronous</button></h4>
+                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
                 </li>
-                <li class="journey-card cert-item"
-                    data-img="assets/img/certificates/cp-dasar-css.jpg" data-date="20 Februari 2024" data-title="Belajar Dasar CSS"
-                    data-desc="Dasar styling halaman web dengan CSS." data-code="JK7VFHV" data-until="19 Februari 2027">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="journey-date">20 Februari 2024</span>
+                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
+                    data-img="/assets/img/certificates/cp-dasar-css.jpg" data-date="20 Februari 2024" data-title="Belajar Dasar CSS" data-desc="Dasar styling halaman web dengan CSS." data-code="JK7VFHV">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
+                    <span class="date-chip">20 Februari 2024</span>
                   </div>
-                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar Dasar CSS</button></h4>
-                  <p class="journey-org">CodePolitan · Kelas Online</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar Dasar CSS</button></h4>
+                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
                 </li>
-                <li class="journey-card cert-item"
-                    data-img="assets/img/certificates/cp-algoritma-dasar.jpg" data-date="15 Februari 2024" data-title="Algoritma dan Pemrograman Dasar"
-                    data-desc="Fondasi logika pemrograman dan algoritma." data-code="2ZI0RQP" data-until="14 Februari 2027">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="journey-date">15 Februari 2024</span>
+                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
+                    data-img="/assets/img/certificates/cp-algoritma-dasar.jpg" data-date="15 Februari 2024" data-title="Algoritma dan Pemrograman Dasar" data-desc="Fondasi logika pemrograman dan algoritma." data-code="2ZI0RQP">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
+                    <span class="date-chip">15 Februari 2024</span>
                   </div>
-                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Algoritma dan Pemrograman Dasar</button></h4>
-                  <p class="journey-org">CodePolitan · Kelas Online</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Algoritma dan Pemrograman Dasar</button></h4>
+                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
                 </li>
-                <li class="journey-card cert-item"
-                    data-img="assets/img/certificates/cp-terminal-cmd.jpg" data-date="15 Februari 2024" data-title="Belajar Menggunakan Terminal atau CMD untuk Development"
-                    data-desc="Menggunakan terminal/CMD untuk alur kerja development sehari-hari." data-code="BT2D9M5" data-until="14 Februari 2027">
-                  <div class="journey-top">
-                    <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="journey-date">15 Februari 2024</span>
+                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
+                    data-img="/assets/img/certificates/cp-terminal-cmd.jpg" data-date="15 Februari 2024" data-title="Belajar Menggunakan Terminal atau CMD untuk Development" data-desc="Menggunakan terminal/CMD untuk alur kerja development sehari-hari." data-code="BT2D9M5">
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
+                    <span class="date-chip">15 Februari 2024</span>
                   </div>
-                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar Menggunakan Terminal atau CMD untuk Development</button></h4>
-                  <p class="journey-org">CodePolitan · Kelas Online</p>
+                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar Menggunakan Terminal atau CMD untuk Development</button></h4>
+                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
                 </li>
               </ol>
             </div>
 
             <!-- Detail sertifikat terpilih -->
-            <article class="cert-detail" id="cert-detail" aria-live="polite">
-              <a class="cert-detail-img" id="cert-detail-link" href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat ukuran penuh">
-                <img id="cert-detail-img" src="assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
-                <span class="cert-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+            <article id="cert-detail" class="panel-side flex flex-col self-start overflow-hidden rounded-[22px] border border-line bg-surface shadow-card lg:sticky lg:top-[calc(68px+2rem)]" aria-live="polite">
+              <a id="cert-detail-link" class="group relative block aspect-[1400/990] overflow-hidden border-b border-line bg-white" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat ukuran penuh">
+                <img id="cert-detail-img" class="swap-item size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
+                <span class="absolute inset-0 grid place-items-center bg-black/45 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true"><svg class="size-[50px] rounded-full bg-accent p-3 text-on-accent" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg></span>
               </a>
-              <div class="cert-detail-body" id="cert-detail-body">
-                <div class="cert-detail-meta">
-                  <span class="journey-date" id="cert-detail-date">15 Mei 2024</span>
-                  <span class="cert-detail-count mono" id="cert-detail-count">01 / 05</span>
+              <div class="swap-item p-6">
+                <div class="mb-3 flex items-center justify-between">
+                  <span id="cert-detail-date" class="date-chip">15 Mei 2024</span>
+                  <span id="cert-detail-count" class="font-mono text-[.78rem] text-muted">01 / 05</span>
                 </div>
-                <h4 id="cert-detail-title">Belajar AJAX dan Web API</h4>
-                <p class="journey-org">CodePolitan · Kelas Online</p>
-                <p class="cert-detail-desc" id="cert-detail-desc">Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API.</p>
-                <div class="cert-detail-actions">
-                  <a class="btn btn-sm btn-primary" id="cert-detail-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
-                  <a class="btn btn-sm btn-ghost" id="cert-detail-full" href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener">Lihat ukuran penuh</a>
+                <h4 id="cert-detail-title" class="font-display text-[1.3rem] leading-tight font-bold text-heading">Belajar AJAX dan Web API</h4>
+                <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
+                <p id="cert-detail-desc" class="text-[.95rem] text-muted">Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API.</p>
+                <div class="mt-5 flex flex-wrap gap-2.5">
+                  <a id="cert-detail-verify" class="btn btn-sm btn-primary" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
+                  <a id="cert-detail-full" class="btn btn-sm btn-ghost" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener">Lihat ukuran penuh</a>
                 </div>
               </div>
             </article>
@@ -310,131 +300,105 @@
     </section>
 
     <!-- ===== SKILLS ===== -->
-    <section class="section section-alt" id="skills">
-      <div class="container">
-        <header class="section-head reveal">
+    <section id="skills" class="bg-bg-alt py-22 lg:py-28">
+      <div class="wrap">
+        <header class="reveal mb-12">
           <span class="section-tag">02. Skills</span>
           <h2 class="section-title">Teknologi yang saya gunakan</h2>
         </header>
 
-        <div class="skills-grid">
-          <article class="skill-card reveal">
-            <div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-            <h3>Frontend</h3>
-            <ul class="chips">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li>
-            </ul>
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <article class="reveal rounded-[22px] border border-line bg-surface p-7 transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card">
+            <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-6"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h3 class="mb-4 font-display text-xl font-bold text-heading">Frontend</h3>
+            <ul class="flex flex-wrap gap-2"><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">HTML</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">CSS</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">JavaScript</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">React</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Tailwind CSS</li></ul>
           </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></div>
-            <h3>Backend</h3>
-            <ul class="chips">
-              <li>Node.js</li><li>Express</li><li>Laravel</li><li>PHP</li><li>REST API</li>
-            </ul>
+          <article class="reveal rounded-[22px] border border-line bg-surface p-7 transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card">
+            <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-6"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></div>
+            <h3 class="mb-4 font-display text-xl font-bold text-heading">Backend</h3>
+            <ul class="flex flex-wrap gap-2"><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Node.js</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Express</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Laravel</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">PHP</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">REST API</li></ul>
           </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-            <h3>Database</h3>
-            <ul class="chips">
-              <li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li>
-            </ul>
+          <article class="reveal rounded-[22px] border border-line bg-surface p-7 transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card">
+            <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-6"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+            <h3 class="mb-4 font-display text-xl font-bold text-heading">Database</h3>
+            <ul class="flex flex-wrap gap-2"><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">MySQL</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">PostgreSQL</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">MongoDB</li></ul>
           </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <h3>Tools</h3>
-            <ul class="chips">
-              <li>Git</li><li>GitHub</li><li>Docker</li><li>Figma</li><li>VS Code</li>
-            </ul>
+          <article class="reveal rounded-[22px] border border-line bg-surface p-7 transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card">
+            <div class="mb-4 grid size-12 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <h3 class="mb-4 font-display text-xl font-bold text-heading">Tools</h3>
+            <ul class="flex flex-wrap gap-2"><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Git</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">GitHub</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Docker</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">Figma</li><li class="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-[.85rem] font-medium transition-colors hover:border-accent hover:text-accent">VS Code</li></ul>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ===== PROJECTS ===== -->
-    <section class="section" id="projects">
-      <div class="container">
-        <header class="section-head reveal">
+    <section id="projects" class="py-22 lg:py-28">
+      <div class="wrap">
+        <header class="reveal mb-12">
           <span class="section-tag">03. Proyek</span>
           <h2 class="section-title">Proyek unggulan</h2>
         </header>
 
-        <div class="filter-bar reveal" role="tablist" aria-label="Filter proyek">
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua</button>
-          <button class="filter-btn" data-filter="fullstack" role="tab" aria-selected="false">Full Stack</button>
-          <button class="filter-btn" data-filter="frontend" role="tab" aria-selected="false">Frontend</button>
-          <button class="filter-btn" data-filter="backend" role="tab" aria-selected="false">Backend</button>
+        <div class="reveal mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter proyek">
+          <button class="filter-btn cursor-pointer rounded-full border border-line px-4 py-2 text-[.88rem] font-medium text-muted transition-colors hover:border-accent hover:text-accent [&.active]:border-accent [&.active]:bg-accent [&.active]:text-on-accent active" data-filter="all" role="tab" aria-selected="true">Semua</button>
+          <button class="filter-btn cursor-pointer rounded-full border border-line px-4 py-2 text-[.88rem] font-medium text-muted transition-colors hover:border-accent hover:text-accent [&.active]:border-accent [&.active]:bg-accent [&.active]:text-on-accent" data-filter="fullstack" role="tab" aria-selected="false">Full Stack</button>
+          <button class="filter-btn cursor-pointer rounded-full border border-line px-4 py-2 text-[.88rem] font-medium text-muted transition-colors hover:border-accent hover:text-accent [&.active]:border-accent [&.active]:bg-accent [&.active]:text-on-accent" data-filter="frontend" role="tab" aria-selected="false">Frontend</button>
+          <button class="filter-btn cursor-pointer rounded-full border border-line px-4 py-2 text-[.88rem] font-medium text-muted transition-colors hover:border-accent hover:text-accent [&.active]:border-accent [&.active]:bg-accent [&.active]:text-on-accent" data-filter="backend" role="tab" aria-selected="false">Backend</button>
         </div>
 
-        <div class="projects-grid">
-          <article class="project-card reveal" data-category="fullstack">
-            <div class="project-thumb">
-              <img src="assets/img/project-1.svg" alt="Tampilan proyek E-Commerce Kopi Nusantara" loading="lazy" />
+        <div class="grid gap-6 sm:grid-cols-2">
+          <article class="project-card reveal group flex flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card [&.hide]:hidden" data-category="fullstack">
+            <div class="aspect-video overflow-hidden border-b border-line bg-surface-2">
+              <img class="size-full object-cover transition-transform duration-700 ease-expo group-hover:scale-105" src="/assets/img/project-1.svg" alt="Tampilan proyek E-Commerce Kopi Nusantara" loading="lazy" />
             </div>
-            <div class="project-body">
-              <h3>Kopi Nusantara — E-Commerce</h3>
-              <p>
-                Toko online untuk UMKM kopi lokal dengan keranjang belanja, checkout, dan dashboard
-                admin untuk mengelola stok serta pesanan.
-              </p>
-              <ul class="tech-list"><li>React</li><li>Node.js</li><li>Express</li><li>MongoDB</li></ul>
-              <div class="project-links">
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="mb-2.5 font-display text-xl font-bold text-heading">Kopi Nusantara — E-Commerce</h3>
+              <p class="mb-4 text-[.95rem] text-muted">Toko online untuk UMKM kopi lokal dengan keranjang belanja, checkout, dan dashboard admin untuk mengelola stok serta pesanan.</p>
+              <ul class="mb-6 flex flex-wrap gap-x-3.5 gap-y-1.5"><li class="font-mono text-[.78rem] text-accent">React</li><li class="font-mono text-[.78rem] text-accent">Node.js</li><li class="font-mono text-[.78rem] text-accent">Express</li><li class="font-mono text-[.78rem] text-accent">MongoDB</li></ul>
+              <div class="mt-auto flex gap-2.5">
                 <a href="#" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Live Demo</a>
                 <a href="https://github.com/bgsdewo" class="btn btn-sm btn-ghost" target="_blank" rel="noopener">GitHub</a>
               </div>
             </div>
           </article>
-
-          <article class="project-card reveal" data-category="fullstack">
-            <div class="project-thumb">
-              <img src="assets/img/project-2.svg" alt="Tampilan proyek Sistem Informasi Sekolah" loading="lazy" />
+          <article class="project-card reveal group flex flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card [&.hide]:hidden" data-category="fullstack">
+            <div class="aspect-video overflow-hidden border-b border-line bg-surface-2">
+              <img class="size-full object-cover transition-transform duration-700 ease-expo group-hover:scale-105" src="/assets/img/project-2.svg" alt="Tampilan proyek Sistem Informasi Sekolah" loading="lazy" />
             </div>
-            <div class="project-body">
-              <h3>SIAKAD — Sistem Informasi Sekolah</h3>
-              <p>
-                Aplikasi manajemen nilai, absensi, dan jadwal untuk sekolah. Mengurangi pencatatan
-                manual dengan role guru, siswa, dan admin.
-              </p>
-              <ul class="tech-list"><li>Laravel</li><li>PHP</li><li>MySQL</li><li>Tailwind</li></ul>
-              <div class="project-links">
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="mb-2.5 font-display text-xl font-bold text-heading">SIAKAD — Sistem Informasi Sekolah</h3>
+              <p class="mb-4 text-[.95rem] text-muted">Aplikasi manajemen nilai, absensi, dan jadwal untuk sekolah. Mengurangi pencatatan manual dengan role guru, siswa, dan admin.</p>
+              <ul class="mb-6 flex flex-wrap gap-x-3.5 gap-y-1.5"><li class="font-mono text-[.78rem] text-accent">Laravel</li><li class="font-mono text-[.78rem] text-accent">PHP</li><li class="font-mono text-[.78rem] text-accent">MySQL</li><li class="font-mono text-[.78rem] text-accent">Tailwind</li></ul>
+              <div class="mt-auto flex gap-2.5">
                 <a href="#" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Live Demo</a>
                 <a href="https://github.com/bgsdewo" class="btn btn-sm btn-ghost" target="_blank" rel="noopener">GitHub</a>
               </div>
             </div>
           </article>
-
-          <article class="project-card reveal" data-category="backend">
-            <div class="project-thumb">
-              <img src="assets/img/project-3.svg" alt="Tampilan proyek REST API Task Manager" loading="lazy" />
+          <article class="project-card reveal group flex flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card [&.hide]:hidden" data-category="backend">
+            <div class="aspect-video overflow-hidden border-b border-line bg-surface-2">
+              <img class="size-full object-cover transition-transform duration-700 ease-expo group-hover:scale-105" src="/assets/img/project-3.svg" alt="Tampilan proyek REST API Task Manager" loading="lazy" />
             </div>
-            <div class="project-body">
-              <h3>TaskFlow API</h3>
-              <p>
-                REST API manajemen tugas dengan autentikasi JWT, role-based access, dan dokumentasi
-                Swagger. Siap di-deploy dengan Docker.
-              </p>
-              <ul class="tech-list"><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>Docker</li></ul>
-              <div class="project-links">
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="mb-2.5 font-display text-xl font-bold text-heading">TaskFlow API</h3>
+              <p class="mb-4 text-[.95rem] text-muted">REST API manajemen tugas dengan autentikasi JWT, role-based access, dan dokumentasi Swagger. Siap di-deploy dengan Docker.</p>
+              <ul class="mb-6 flex flex-wrap gap-x-3.5 gap-y-1.5"><li class="font-mono text-[.78rem] text-accent">Node.js</li><li class="font-mono text-[.78rem] text-accent">Express</li><li class="font-mono text-[.78rem] text-accent">PostgreSQL</li><li class="font-mono text-[.78rem] text-accent">Docker</li></ul>
+              <div class="mt-auto flex gap-2.5">
                 <a href="#" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Docs</a>
                 <a href="https://github.com/bgsdewo" class="btn btn-sm btn-ghost" target="_blank" rel="noopener">GitHub</a>
               </div>
             </div>
           </article>
-
-          <article class="project-card reveal" data-category="frontend">
-            <div class="project-thumb">
-              <img src="assets/img/project-4.svg" alt="Tampilan proyek dashboard cuaca" loading="lazy" />
+          <article class="project-card reveal group flex flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition duration-300 ease-expo hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card [&.hide]:hidden" data-category="frontend">
+            <div class="aspect-video overflow-hidden border-b border-line bg-surface-2">
+              <img class="size-full object-cover transition-transform duration-700 ease-expo group-hover:scale-105" src="/assets/img/project-4.svg" alt="Tampilan proyek dashboard cuaca" loading="lazy" />
             </div>
-            <div class="project-body">
-              <h3>Cuacaku — Weather Dashboard</h3>
-              <p>
-                Dashboard cuaca real-time dengan pencarian kota, prakiraan 7 hari, dan grafik suhu
-                yang responsif di semua perangkat.
-              </p>
-              <ul class="tech-list"><li>React</li><li>Tailwind</li><li>OpenWeather API</li></ul>
-              <div class="project-links">
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="mb-2.5 font-display text-xl font-bold text-heading">Cuacaku — Weather Dashboard</h3>
+              <p class="mb-4 text-[.95rem] text-muted">Dashboard cuaca real-time dengan pencarian kota, prakiraan 7 hari, dan grafik suhu yang responsif di semua perangkat.</p>
+              <ul class="mb-6 flex flex-wrap gap-x-3.5 gap-y-1.5"><li class="font-mono text-[.78rem] text-accent">React</li><li class="font-mono text-[.78rem] text-accent">Tailwind</li><li class="font-mono text-[.78rem] text-accent">OpenWeather API</li></ul>
+              <div class="mt-auto flex gap-2.5">
                 <a href="#" class="btn btn-sm btn-primary" target="_blank" rel="noopener">Live Demo</a>
                 <a href="https://github.com/bgsdewo" class="btn btn-sm btn-ghost" target="_blank" rel="noopener">GitHub</a>
               </div>
@@ -445,60 +409,60 @@
     </section>
 
     <!-- ===== CONTACT ===== -->
-    <section class="section section-alt" id="contact">
-      <div class="container">
-        <header class="section-head reveal">
+    <section id="contact" class="bg-bg-alt py-22 lg:py-28">
+      <div class="wrap">
+        <header class="reveal mb-12">
           <span class="section-tag">04. Kontak</span>
           <h2 class="section-title">Mari bekerja sama</h2>
         </header>
 
-        <div class="contact-grid">
-          <div class="contact-info reveal">
-            <p class="contact-lead">
+        <div class="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16">
+          <div class="reveal">
+            <p class="mb-7 max-w-[460px] text-[1.05rem] text-muted">
               Punya proyek, tawaran kerja, atau sekadar ingin menyapa? Kirim pesan — saya biasanya
               membalas dalam 1×24 jam.
             </p>
-            <ul class="contact-list">
-              <li>
-                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
-                <div><small>Email</small><a href="mailto:email@contoh.com">email@contoh.com</a></div>
+            <ul class="grid gap-4">
+              <li class="flex items-center gap-4">
+                <span class="grid size-[46px] shrink-0 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-5"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
+                <div><small class="block text-[.78rem] leading-tight text-muted">Email</small><a href="mailto:email@contoh.com" class="font-medium break-words text-heading hover:text-accent">email@contoh.com</a></div>
               </li>
-              <li>
-                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
-                <div><small>GitHub</small><a href="https://github.com/bgsdewo" target="_blank" rel="noopener">github.com/bgsdewo</a></div>
+              <li class="flex items-center gap-4">
+                <span class="grid size-[46px] shrink-0 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+                <div><small class="block text-[.78rem] leading-tight text-muted">GitHub</small><a href="https://github.com/bgsdewo" target="_blank" rel="noopener" class="font-medium break-words text-heading hover:text-accent">github.com/bgsdewo</a></div>
               </li>
-              <li>
-                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></span>
-                <div><small>LinkedIn</small><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener">linkedin.com/in/username</a></div>
+              <li class="flex items-center gap-4">
+                <span class="grid size-[46px] shrink-0 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></span>
+                <div><small class="block text-[.78rem] leading-tight text-muted">LinkedIn</small><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" class="font-medium break-words text-heading hover:text-accent">linkedin.com/in/username</a></div>
               </li>
-              <li>
-                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                <div><small>Lokasi</small><span>Jakarta, Indonesia</span></div>
+              <li class="flex items-center gap-4">
+                <span class="grid size-[46px] shrink-0 place-items-center rounded-xl bg-accent-soft text-accent [&>svg]:size-5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <div><small class="block text-[.78rem] leading-tight text-muted">Lokasi</small><span class="font-medium text-heading">Jakarta, Indonesia</span></div>
               </li>
             </ul>
           </div>
 
-          <form class="contact-form reveal" id="contact-form" novalidate>
-            <div class="field">
-              <label for="name">Nama</label>
-              <input type="text" id="name" name="name" placeholder="Nama kamu" required />
-              <small class="error-msg"></small>
+          <form id="contact-form" class="reveal rounded-[22px] border border-line bg-surface p-7" novalidate>
+            <div class="field group mb-[1.15rem]">
+              <label for="name" class="mb-1.5 block text-[.88rem] font-semibold text-heading">Nama</label>
+              <input type="text" id="name" name="name" placeholder="Nama kamu" required class="w-full resize-y rounded-lg border-[1.5px] border-line bg-bg px-4 py-3 transition placeholder:text-muted/70 focus:border-accent focus:shadow-[0_0_0_4px_var(--color-accent-soft)] focus:outline-none group-[.invalid]:border-red-500" />
+              <small class="error-msg mt-1 block min-h-[1.1em] text-[.78rem] text-red-500"></small>
             </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="nama@email.com" required />
-              <small class="error-msg"></small>
+            <div class="field group mb-[1.15rem]">
+              <label for="email" class="mb-1.5 block text-[.88rem] font-semibold text-heading">Email</label>
+              <input type="email" id="email" name="email" placeholder="nama@email.com" required class="w-full resize-y rounded-lg border-[1.5px] border-line bg-bg px-4 py-3 transition placeholder:text-muted/70 focus:border-accent focus:shadow-[0_0_0_4px_var(--color-accent-soft)] focus:outline-none group-[.invalid]:border-red-500" />
+              <small class="error-msg mt-1 block min-h-[1.1em] text-[.78rem] text-red-500"></small>
             </div>
-            <div class="field">
-              <label for="message">Pesan</label>
-              <textarea id="message" name="message" rows="5" placeholder="Ceritakan sedikit tentang proyekmu..." required></textarea>
-              <small class="error-msg"></small>
+            <div class="field group mb-[1.15rem]">
+              <label for="message" class="mb-1.5 block text-[.88rem] font-semibold text-heading">Pesan</label>
+              <textarea id="message" name="message" rows="5" placeholder="Ceritakan sedikit tentang proyekmu..." required class="w-full resize-y rounded-lg border-[1.5px] border-line bg-bg px-4 py-3 transition placeholder:text-muted/70 focus:border-accent focus:shadow-[0_0_0_4px_var(--color-accent-soft)] focus:outline-none group-[.invalid]:border-red-500"></textarea>
+              <small class="error-msg mt-1 block min-h-[1.1em] text-[.78rem] text-red-500"></small>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <button type="submit" class="btn btn-primary w-full cursor-pointer">
               Kirim Pesan
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
             </button>
-            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p id="form-status" class="mt-4 min-h-[1.4em] text-center text-[.9rem] text-accent" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -506,29 +470,22 @@
   </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <a href="#home" class="logo"><span class="logo-bracket">&lt;</span>BS<span class="logo-bracket">/&gt;</span></a>
-      <p>&copy; <span id="year"></span> Bagus Sadewo. Dibuat dengan HTML, CSS &amp; JavaScript.</p>
-      <ul class="footer-social">
-        <li><a href="https://github.com/bgsdewo" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="mailto:email@contoh.com">Email</a></li>
+  <footer class="border-t border-line py-10">
+    <div class="wrap flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+      <a href="#home" class="font-mono text-xl font-medium text-heading"><span class="text-accent">&lt;</span>BS<span class="text-accent">/&gt;</span></a>
+      <p class="text-[.88rem] text-muted">&copy; <span id="year"></span> Bagus Sadewo. Dibuat dengan Vite, Tailwind CSS &amp; JavaScript.</p>
+      <ul class="flex gap-5 text-[.88rem] text-muted">
+        <li><a href="https://github.com/bgsdewo" target="_blank" rel="noopener" class="transition-colors hover:text-accent">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" class="transition-colors hover:text-accent">LinkedIn</a></li>
+        <li><a href="mailto:email@contoh.com" class="transition-colors hover:text-accent">Email</a></li>
       </ul>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+  <button id="back-to-top" class="invisible fixed right-5 bottom-5 z-90 grid size-[46px] translate-y-3 cursor-pointer place-items-center rounded-full bg-accent text-on-accent opacity-0 shadow-card transition duration-300 ease-expo [&.show]:visible [&.show]:translate-y-0 [&.show]:opacity-100 [&>svg]:size-5" aria-label="Kembali ke atas">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
-  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-
-  <!-- Library animasi (CDN): GSAP untuk motion, Lenis untuk smooth scroll.
-       Three.js dimuat otomatis oleh hero.js. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/hero.js" defer></script>
+  <div id="cursor-glow" class="pointer-events-none fixed top-0 left-0 z-[1] -mt-[210px] -ml-[210px] hidden size-[420px] rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-accent)_14%,transparent)_0%,transparent_65%)] opacity-0 transition-opacity duration-500 pointer-fine:block light:mix-blend-multiply [&.on]:opacity-100" aria-hidden="true"></div>
 </body>
 </html>

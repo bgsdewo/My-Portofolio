@@ -11,6 +11,7 @@ Website portofolio pribadi sebagai **Full Stack Developer**, dibangun dengan **V
 | [Three.js](https://threejs.org) | Scene 3D "Full Stack" di hero: developer kecil memperagakan alur request dari Frontend → Backend → Database lalu kembali (`src/js/stack-scene.js`) |
 | [GSAP](https://gsap.com) | Animasi intro, huruf judul, tombol magnetik, cahaya kursor |
 | [Lenis](https://lenis.darkroom.engineering) | Smooth scroll |
+| [Simple Icons](https://simpleicons.org) | Logo teknologi di section Skills (SVG di-inline langsung di `index.html`) |
 
 Semua library diinstal lewat npm (tidak lagi dari CDN). Three.js dimuat terpisah (lazy) supaya halaman tetap cepat tampil.
 
@@ -75,6 +76,7 @@ npm run preview
 - Navbar sticky + highlight section aktif
 - Hero 3D interaktif: developer berjalan & naik lift antar lapisan Frontend / Backend / Database dengan balon teks tiap langkah, hover lapisan, parallax mouse & scroll
 - About dengan tab Pendidikan / Pengalaman / Sertifikat, grid foto, pagination kartu, panel detail sertifikat
+- Skills bento grid: sorotan cahaya mengikuti kursor, kartu miring 3D, logo menyala dengan warna brand
 - Filter proyek, form kontak dengan validasi (membuka aplikasi email via `mailto`)
 - Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`
 

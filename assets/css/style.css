@@ -759,6 +759,41 @@ html.lenis, html.lenis body { height: auto; }
   flex-shrink: 0;
 }
 .about-main .timeline { margin-top: 1.75rem; }
+
+/* Pagination timeline (3 kartu per halaman) */
+.timeline-item.is-hidden { display: none; }
+.timeline.page-in .timeline-item:not(.is-hidden) { animation: panelIn .45s var(--ease) both; }
+.timeline.page-in .timeline-item:not(.is-hidden):nth-child(3n+2) { animation-delay: .06s; }
+.timeline.page-in .timeline-item:not(.is-hidden):nth-child(3n) { animation-delay: .12s; }
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: .25rem;
+  padding-left: 1.75rem;
+}
+.pager-info { font-family: var(--font-mono); font-size: .78rem; color: var(--text-muted); }
+.pager-btns { display: flex; align-items: center; gap: .4rem; }
+.pager-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 .6rem;
+  display: inline-grid;
+  place-items: center;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: color .2s, border-color .2s, background-color .2s;
+}
+.pager-btn svg { width: 16px; height: 16px; }
+.pager-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.pager-btn[aria-current='page'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.pager-btn:disabled { opacity: .4; cursor: not-allowed; }
 @keyframes panelIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
@@ -1056,9 +1091,11 @@ html.lenis, html.lenis body { height: auto; }
   }
   .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
-  .about-grid { grid-template-columns: 340px 1fr; gap: 4.5rem; align-items: start; }
+  /* Desktop: teks & perjalanan di kiri, galeri di kanan */
+  .about-grid { grid-template-columns: 1fr 340px; gap: 4.5rem; align-items: start; }
+  .about-side { order: 2; }
   .about-head { grid-template-columns: 1fr minmax(0, 470px); align-items: end; gap: 3rem; }
-  .about-grid--wide { grid-template-columns: 440px 1fr; gap: 3.5rem; }
+  .about-grid--wide { grid-template-columns: 1fr 440px; gap: 3.5rem; }
   .about-grid--wide .gallery { width: 100%; }
   .about-side { position: sticky; top: calc(var(--nav-h) + 2rem); }
   .contact-grid { grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }

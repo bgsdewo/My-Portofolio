@@ -241,6 +241,18 @@
     form.reset();
   });
 
+  /* ---------- Susun posisi tile di grid foto (bento) ----------
+     Tile yang terlihat diberi data-pos 1..n, grid diberi data-count,
+     sehingga layout tetap rapi berapa pun jumlah foto yang tampil. */
+  function layoutPhotoGrid(grid) {
+    var visible = Array.prototype.filter.call(grid.children, function (t) {
+      return !t.classList.contains('is-hidden');
+    });
+    grid.setAttribute('data-count', Math.min(visible.length, 4));
+    visible.forEach(function (t, i) { t.setAttribute('data-pos', i + 1); });
+  }
+  document.querySelectorAll('.photo-grid').forEach(layoutPhotoGrid);
+
   /* ---------- Pagination grid kartu di About ----------
      Jumlah kartu per halaman diatur lewat atribut di HTML:
      data-per-page (desktop/tablet) dan data-per-page-sm (HP, < 640px). */
@@ -275,6 +287,7 @@
       if (pages < 2) { // semua muat di satu halaman
         items.forEach(function (item) { item.classList.remove('is-hidden'); });
         syncItems.forEach(function (item) { item.classList.remove('is-hidden'); });
+        if (synced) layoutPhotoGrid(synced);
         return;
       }
 
@@ -308,6 +321,7 @@
       var end = Math.min(start + perPage, items.length);
       items.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
       syncItems.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
+      if (synced) layoutPhotoGrid(synced);
       nums.forEach(function (b, i) {
         if (i === page) b.setAttribute('aria-current', 'page');
         else b.removeAttribute('aria-current');
@@ -331,8 +345,15 @@
     }
 
     build();
-    if (smallScreen.addEventListener) smallScreen.addEventListener('change', build);
-    else smallScreen.addListener(build);
+    // Bangun ulang hanya bila benar-benar pindah antara HP <-> desktop
+    var wasSmall = smallScreen.matches;
+    function onBreakpoint() {
+      if (smallScreen.matches === wasSmall) return;
+      wasSmall = smallScreen.matches;
+      build();
+    }
+    if (smallScreen.addEventListener) smallScreen.addEventListener('change', onBreakpoint);
+    else smallScreen.addListener(onBreakpoint);
   });
 
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */

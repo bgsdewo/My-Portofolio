@@ -672,6 +672,29 @@ html.lenis, html.lenis body { height: auto; }
 .stat strong::after { content: '+'; }
 .stat span { font-size: .8rem; color: var(--text-muted); }
 
+/* Galeri sertifikat (landscape): gambar utuh, kontrol di bawah gambar */
+.gallery--landscape { width: 100%; aspect-ratio: auto; padding-bottom: 2.4rem; }
+.gallery--landscape .gallery-track { height: auto; aspect-ratio: 1400 / 990; background: #fff; }
+.gallery--landscape .slide img,
+.gallery--landscape .slide.active img { object-fit: contain; transform: none; }
+.gallery--landscape .slide figcaption { display: none; }
+.gallery--landscape .gallery-dots { left: .9rem; right: 4.6rem; bottom: .95rem; }
+.gallery--landscape .gallery-dot { background: var(--border); }
+.gallery--landscape .gallery-count { right: 1.1rem; bottom: .55rem; color: var(--text-muted); }
+.gallery--landscape .gallery-nav { top: calc(50% - 1.2rem); }
+
+.timeline-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem 1.1rem;
+  margin-top: .8rem;
+  font-size: .84rem;
+}
+.timeline-links a { font-weight: 600; color: var(--accent); }
+.timeline-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.timeline-links span { color: var(--text-muted); font-size: .78rem; }
+
 /* Tabs perjalanan */
 .tabs {
   position: relative;
@@ -1035,6 +1058,8 @@ html.lenis, html.lenis body { height: auto; }
 
   .about-grid { grid-template-columns: 340px 1fr; gap: 4.5rem; align-items: start; }
   .about-head { grid-template-columns: 1fr minmax(0, 470px); align-items: end; gap: 3rem; }
+  .about-grid--wide { grid-template-columns: 440px 1fr; gap: 3.5rem; }
+  .about-grid--wide .gallery { width: 100%; }
   .about-side { position: sticky; top: calc(var(--nav-h) + 2rem); }
   .contact-grid { grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }
   .section { padding: 7rem 0; }

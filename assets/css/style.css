@@ -632,22 +632,9 @@ html.lenis, html.lenis body { height: auto; }
 .cert-detail-count { font-size: .78rem; color: var(--text-muted); }
 .cert-detail-body h4 { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.3; color: var(--heading); }
 .cert-detail-desc { color: var(--text-muted); font-size: .95rem; }
-.cert-detail-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: .75rem;
-  margin: 1.2rem 0;
-  padding: .9rem 1rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-.cert-detail-info dt { font-size: .72rem; color: var(--text-muted); }
-.cert-detail-info dd { font-size: .86rem; font-weight: 600; color: var(--heading); }
-.cert-detail-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.cert-detail-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
 .cert-detail.swap .cert-detail-img img,
 .cert-detail.swap .cert-detail-body { animation: panelIn .45s var(--ease) both; }
-@media (max-width: 420px) { .cert-detail-info { grid-template-columns: 1fr 1fr; } }
 
 .photo-grid > .is-hidden { display: none; }
 .photo-grid.page-in > :not(.is-hidden) { animation: panelIn .45s var(--ease) both; }

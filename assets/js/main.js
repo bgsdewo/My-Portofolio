@@ -351,6 +351,75 @@
     galleries.push({ el: gallery, reset: function () { go(0); } });
   });
 
+  /* ---------- Pagination timeline di About (3 kartu per halaman) ---------- */
+  var PER_PAGE = 3;
+  document.querySelectorAll('.about-main .timeline').forEach(function (list) {
+    var items = Array.prototype.slice.call(list.children);
+    var pages = Math.ceil(items.length / PER_PAGE);
+    if (pages < 2) return; // tidak perlu pagination
+
+    var page = 0;
+    var pager = document.createElement('nav');
+    pager.className = 'pager';
+    pager.setAttribute('aria-label', 'Halaman daftar');
+    var info = document.createElement('span');
+    info.className = 'pager-info';
+    info.setAttribute('aria-live', 'polite');
+    var btns = document.createElement('div');
+    btns.className = 'pager-btns';
+
+    function makeBtn(html, label, onClick) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pager-btn';
+      b.innerHTML = html;
+      b.setAttribute('aria-label', label);
+      b.addEventListener('click', onClick);
+      btns.appendChild(b);
+      return b;
+    }
+
+    var prev = makeBtn('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>', 'Halaman sebelumnya', function () { show(page - 1, true); });
+    var nums = [];
+    for (var n = 0; n < pages; n++) {
+      (function (n) {
+        nums.push(makeBtn(String(n + 1), 'Halaman ' + (n + 1), function () { show(n, true); }));
+      })(n);
+    }
+    var next = makeBtn('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>', 'Halaman berikutnya', function () { show(page + 1, true); });
+
+    pager.appendChild(info);
+    pager.appendChild(btns);
+    list.after(pager);
+
+    function show(p, animate) {
+      page = Math.max(0, Math.min(p, pages - 1));
+      var start = page * PER_PAGE;
+      var end = Math.min(start + PER_PAGE, items.length);
+      items.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
+      nums.forEach(function (b, i) {
+        if (i === page) b.setAttribute('aria-current', 'page');
+        else b.removeAttribute('aria-current');
+      });
+      prev.disabled = page === 0;
+      next.disabled = page === pages - 1;
+      info.textContent = (start + 1) + '–' + end + ' dari ' + items.length;
+      if (animate) {
+        list.classList.remove('page-in');
+        void list.offsetWidth;
+        list.classList.add('page-in');
+        // Jaga agar awal daftar tetap terlihat setelah pindah halaman
+        var top = list.getBoundingClientRect().top;
+        var navH = document.getElementById('navbar').offsetHeight;
+        if (top < navH) {
+          var y = window.scrollY + top - navH - 16;
+          if (window.lenis) window.lenis.scrollTo(y); else window.scrollTo(0, y);
+        }
+      }
+    }
+    show(0, false);
+  });
+
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */
   var tabList = document.querySelector('.tabs');
   if (tabList) {

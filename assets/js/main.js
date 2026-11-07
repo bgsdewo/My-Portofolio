@@ -351,51 +351,67 @@
     galleries.push({ el: gallery, reset: function () { go(0); } });
   });
 
-  /* ---------- Pagination timeline di About (3 kartu per halaman) ---------- */
-  var PER_PAGE = 3;
-  document.querySelectorAll('.about-main .timeline').forEach(function (list) {
+  /* ---------- Pagination grid kartu di About ----------
+     Jumlah kartu per halaman diatur lewat atribut di HTML:
+     data-per-page (desktop/tablet) dan data-per-page-sm (HP, < 640px). */
+  var smallScreen = window.matchMedia('(max-width: 639px)');
+
+  document.querySelectorAll('[data-paginate]').forEach(function (list) {
     var items = Array.prototype.slice.call(list.children);
-    var pages = Math.ceil(items.length / PER_PAGE);
-    if (pages < 2) return; // tidak perlu pagination
+    var perPage, pages, page, pager, info, prev, next, nums;
 
-    var page = 0;
-    var pager = document.createElement('nav');
-    pager.className = 'pager';
-    pager.setAttribute('aria-label', 'Halaman daftar');
-    var info = document.createElement('span');
-    info.className = 'pager-info';
-    info.setAttribute('aria-live', 'polite');
-    var btns = document.createElement('div');
-    btns.className = 'pager-btns';
-
-    function makeBtn(html, label, onClick) {
+    function makeBtn(parent, html, label, onClick) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'pager-btn';
       b.innerHTML = html;
       b.setAttribute('aria-label', label);
       b.addEventListener('click', onClick);
-      btns.appendChild(b);
+      parent.appendChild(b);
       return b;
     }
 
-    var prev = makeBtn('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>', 'Halaman sebelumnya', function () { show(page - 1, true); });
-    var nums = [];
-    for (var n = 0; n < pages; n++) {
-      (function (n) {
-        nums.push(makeBtn(String(n + 1), 'Halaman ' + (n + 1), function () { show(n, true); }));
-      })(n);
-    }
-    var next = makeBtn('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>', 'Halaman berikutnya', function () { show(page + 1, true); });
+    function build() {
+      var big = parseInt(list.getAttribute('data-per-page'), 10) || 4;
+      var sm = parseInt(list.getAttribute('data-per-page-sm'), 10) || big;
+      perPage = smallScreen.matches ? sm : big;
+      pages = Math.ceil(items.length / perPage);
+      page = 0;
+      if (pager) { pager.remove(); pager = null; }
 
-    pager.appendChild(info);
-    pager.appendChild(btns);
-    list.after(pager);
+      if (pages < 2) { // semua muat di satu halaman
+        items.forEach(function (item) { item.classList.remove('is-hidden'); });
+        return;
+      }
+
+      pager = document.createElement('nav');
+      pager.className = 'pager';
+      pager.setAttribute('aria-label', 'Halaman daftar');
+      info = document.createElement('span');
+      info.className = 'pager-info';
+      info.setAttribute('aria-live', 'polite');
+      var btns = document.createElement('div');
+      btns.className = 'pager-btns';
+
+      prev = makeBtn(btns, '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>', 'Halaman sebelumnya', function () { show(page - 1, true); });
+      nums = [];
+      for (var n = 0; n < pages; n++) {
+        (function (n) {
+          nums.push(makeBtn(btns, String(n + 1), 'Halaman ' + (n + 1), function () { show(n, true); }));
+        })(n);
+      }
+      next = makeBtn(btns, '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>', 'Halaman berikutnya', function () { show(page + 1, true); });
+
+      pager.appendChild(info);
+      pager.appendChild(btns);
+      list.after(pager);
+      show(0, false);
+    }
 
     function show(p, animate) {
       page = Math.max(0, Math.min(p, pages - 1));
-      var start = page * PER_PAGE;
-      var end = Math.min(start + PER_PAGE, items.length);
+      var start = page * perPage;
+      var end = Math.min(start + perPage, items.length);
       items.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
       nums.forEach(function (b, i) {
         if (i === page) b.setAttribute('aria-current', 'page');
@@ -417,7 +433,10 @@
         }
       }
     }
-    show(0, false);
+
+    build();
+    if (smallScreen.addEventListener) smallScreen.addEventListener('change', build);
+    else smallScreen.addListener(build);
   });
 
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */

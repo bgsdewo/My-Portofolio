@@ -3,18 +3,20 @@
    - GSAP     : animasi intro, tombol magnetik, cahaya kursor
    - Lenis    : smooth scroll di seluruh halaman
    - Three.js : grafik kontribusi GitHub versi 3D (InstancedMesh)
-   Semua bagian punya fallback: kalau CDN gagal dimuat atau user
-   memilih "reduce motion", halaman tetap tampil normal.
+   Library diinstal lewat npm dan di-bundle oleh Vite.
+   Kalau WebGL tidak tersedia atau user memilih "reduce motion",
+   halaman tetap tampil normal.
    ========================================================== */
+import { gsap } from 'gsap';
+import Lenis from 'lenis';
+
 (function () {
   'use strict';
-
-  var THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
 
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var hasGsap = typeof window.gsap !== 'undefined';
+  var hasGsap = true;
 
   var yearEl = document.getElementById('hero-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -37,7 +39,6 @@
 
   /* ---------- 2. Animasi intro ---------- */
   if (hasGsap && !reduceMotion) {
-    var gsap = window.gsap;
     var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
     tl.from('.navbar', { y: -30, autoAlpha: 0, duration: 0.8 })
       .from('[data-hero]:not(.hero-role):not(.hero-desc):not(.hero-cta):not(.hero-social)', { y: 20, autoAlpha: 0, duration: 0.7, stagger: 0.08 }, '-=0.5')
@@ -63,15 +64,15 @@
   /* ---------- 3. Tombol magnetik ---------- */
   if (hasGsap && finePointer && !reduceMotion) {
     document.querySelectorAll('.magnetic').forEach(function (btn) {
-      var xTo = window.gsap.quickTo(btn, 'x', { duration: 0.5, ease: 'power3.out' });
-      var yTo = window.gsap.quickTo(btn, 'y', { duration: 0.5, ease: 'power3.out' });
+      var xTo = gsap.quickTo(btn, 'x', { duration: 0.5, ease: 'power3.out' });
+      var yTo = gsap.quickTo(btn, 'y', { duration: 0.5, ease: 'power3.out' });
       btn.addEventListener('mousemove', function (e) {
         var r = btn.getBoundingClientRect();
         xTo((e.clientX - (r.left + r.width / 2)) * 0.35);
         yTo((e.clientY - (r.top + r.height / 2)) * 0.45);
       });
       btn.addEventListener('mouseleave', function () {
-        window.gsap.to(btn, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.35)' });
+        gsap.to(btn, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.35)' });
       });
     });
   }
@@ -79,8 +80,8 @@
   /* ---------- 4. Cahaya mengikuti kursor ---------- */
   var glow = document.getElementById('cursor-glow');
   if (glow && hasGsap && finePointer && !reduceMotion) {
-    var gx = window.gsap.quickTo(glow, 'x', { duration: 0.6, ease: 'power3.out' });
-    var gy = window.gsap.quickTo(glow, 'y', { duration: 0.6, ease: 'power3.out' });
+    var gx = gsap.quickTo(glow, 'x', { duration: 0.6, ease: 'power3.out' });
+    var gy = gsap.quickTo(glow, 'y', { duration: 0.6, ease: 'power3.out' });
     window.addEventListener('mousemove', function (e) {
       gx(e.clientX);
       gy(e.clientY);
@@ -90,8 +91,8 @@
   }
 
   /* ---------- 5. Smooth scroll (Lenis) ---------- */
-  if (typeof window.Lenis !== 'undefined' && !reduceMotion) {
-    var lenis = new window.Lenis({ duration: 1.15, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+  if (!reduceMotion) {
+    var lenis = new Lenis({ duration: 1.15, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
     window.lenis = lenis;
     (function raf(time) {
       lenis.raf(time);
@@ -117,8 +118,9 @@
   var hero = document.getElementById('home');
   if (!canvas || !hero) return;
 
-  import(THREE_URL).then(initScene).catch(function (err) {
-    // Tanpa WebGL / CDN gagal: biarkan background CSS biasa
+  // Three.js dimuat terpisah (code-splitting) agar halaman tampil lebih cepat
+  import('three').then(initScene).catch(function (err) {
+    // Tanpa WebGL / gagal dimuat: biarkan background CSS biasa
     console.warn('Scene 3D tidak dimuat:', err);
   });
 
@@ -268,11 +270,12 @@
 
     var dummy = new THREE.Object3D();
     var tmpColor = new THREE.Color();
-    var clock = new THREE.Clock();
+    var timer = new THREE.Timer();
     var running = true;
 
     function frame() {
-      var t = clock.getElapsedTime();
+      timer.update();
+      var t = timer.getElapsed();
 
       // Parallax halus mengikuti mouse
       mouse.x += (mouse.tx - mouse.x) * 0.05;
@@ -343,7 +346,7 @@
       // Hemat baterai: berhenti render saat hero tidak terlihat / tab disembunyikan
       var visible = true;
       function setRunning(on) {
-        if (on && !running) { running = true; clock.getDelta(); requestAnimationFrame(loop); }
+        if (on && !running) { running = true; timer.reset(); requestAnimationFrame(loop); }
         running = on;
       }
       new IntersectionObserver(function (entries) {

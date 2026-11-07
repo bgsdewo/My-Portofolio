@@ -8,6 +8,15 @@
 
   document.documentElement.classList.add('js');
 
+  /* Path gambar di data-* / <a href> tidak diproses Vite saat build.
+     Sesuaikan dengan base URL (mis. saat di-deploy ke subfolder GitHub Pages). */
+  var BASE = import.meta.env.BASE_URL;
+  var withBase = function (url) { return url && url.charAt(0) === '/' ? BASE + url.slice(1) : url; };
+  if (BASE !== '/') {
+    document.querySelectorAll('a[href^="/assets/"]').forEach(function (a) { a.setAttribute('href', withBase(a.getAttribute('href'))); });
+    document.querySelectorAll('[data-img^="/"]').forEach(function (el) { el.setAttribute('data-img', withBase(el.getAttribute('data-img'))); });
+  }
+
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -292,13 +301,13 @@
       }
 
       pager = document.createElement('nav');
-      pager.className = 'pager';
+      pager.className = 'pager mt-6 flex items-center justify-between gap-4';
       pager.setAttribute('aria-label', 'Halaman daftar');
       info = document.createElement('span');
-      info.className = 'pager-info';
+      info.className = 'pager-info font-mono text-[.78rem] text-muted';
       info.setAttribute('aria-live', 'polite');
       var btns = document.createElement('div');
-      btns.className = 'pager-btns';
+      btns.className = 'pager-btns flex items-center gap-1.5';
 
       prev = makeBtn(btns, '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>', 'Halaman sebelumnya', function () { show(page - 1, true); });
       nums = [];

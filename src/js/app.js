@@ -20,6 +20,40 @@
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Logo 3D <BS/> ----------
+     Buat 10 salinan teks di belakang lapisan depan (translateZ) agar logo
+     punya ketebalan nyata. Saat di-hover logo miring mengikuti kursor. */
+  document.querySelectorAll('.logo3d').forEach(function (logo) {
+    var stage = logo.querySelector('.logo3d-stage');
+    var front = logo.querySelector('.logo3d-front');
+    for (var i = 1; i <= 10; i++) {
+      var layer = document.createElement('span');
+      layer.className = 'logo3d-depth';
+      layer.setAttribute('aria-hidden', 'true');
+      layer.style.setProperty('--i', i);
+      layer.textContent = front.textContent;
+      stage.insertBefore(layer, front);
+    }
+    if (reduceMotion || !logo.hasAttribute('data-tilt')) return;
+    logo.addEventListener('pointermove', function (e) {
+      var r = logo.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      logo.classList.add('is-tilting');
+      stage.style.transform = 'rotateX(' + (-y * 50) + 'deg) rotateY(' + (x * 60) + 'deg) scale(1.08)';
+    });
+    var resetTimer;
+    logo.addEventListener('pointerenter', function () { clearTimeout(resetTimer); });
+    logo.addEventListener('pointerleave', function () {
+      // Kembali halus ke posisi awal ayunan, lalu ayunan otomatis berlanjut
+      stage.style.transform = 'rotateX(10deg) rotateY(0deg)';
+      resetTimer = setTimeout(function () {
+        stage.style.transform = '';
+        logo.classList.remove('is-tilting');
+      }, 500);
+    });
+  });
+
   /* ---------- Tema terang/gelap ---------- */
   var themeToggle = document.getElementById('theme-toggle');
   themeToggle.addEventListener('click', function () {

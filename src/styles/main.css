@@ -178,6 +178,58 @@
   .card-line:hover::before,
   .card-line.is-selected::before { @apply scale-x-100; }
 
+  /* Logo 3D <BS/>: lapisan depan + 10 lapisan kedalaman (dibuat JS) */
+  .logo3d {
+    display: inline-block;
+    perspective: 420px;
+    font-family: var(--font-mono);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.04em;
+    padding: .35rem .2rem;
+  }
+  .logo3d-stage {
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    animation: logo-swing 7s ease-in-out infinite;
+    transition: transform .5s var(--ease-expo);
+  }
+  .logo3d.is-tilting .logo3d-stage { animation: none; }
+  .logo3d-front,
+  .logo3d-depth { display: block; white-space: nowrap; }
+  .logo3d-front {
+    position: relative;
+    background: linear-gradient(115deg, var(--heading) 20%, var(--accent-2) 50%, var(--heading) 80%);
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 35%, transparent));
+    transition: background-position .9s var(--ease-expo);
+  }
+  .logo3d:hover .logo3d-front { background-position: 0 0; } /* kilau melintas saat hover */
+  .logo3d-front .logo3d-b {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 70%, white), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .logo3d-depth {
+    position: absolute;
+    inset: 0;
+    transform: translateZ(calc(var(--i) * -1.15px));
+    color: color-mix(in srgb, var(--accent-strong) calc(78% - var(--i) * 5%), #020617);
+    pointer-events: none;
+  }
+  [data-theme="light"] .logo3d-depth { color: color-mix(in srgb, var(--accent) calc(70% - var(--i) * 4%), #0f172a); }
+  @keyframes logo-swing {
+    0%, 50%, 100% { transform: rotateX(10deg) rotateY(0deg); }
+    25% { transform: rotateX(14deg) rotateY(-26deg); }
+    75% { transform: rotateX(6deg) rotateY(26deg); }
+  }
+
   /* Hero: huruf judul dipecah JS menjadi .char */
   .hero-title .char { display: inline-block; will-change: transform; }
   .text-shine .char {

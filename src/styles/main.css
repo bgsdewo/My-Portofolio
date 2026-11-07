@@ -399,11 +399,13 @@
   [data-count="2"] > [data-pos="2"] { grid-column: 2; grid-row: 1 / -1; }
   [data-count="1"] > [data-pos="1"] { grid-column: 1 / -1; grid-row: 1 / -1; }
 
-  /* Sertifikat: marquee 2 baris tanpa henti (track = 2x konten, geser 50%) */
-  .cert-track { animation: cert-left 38s linear infinite; }
-  .cert-track.to-right { animation-name: cert-right; animation-duration: 42s; }
-  @keyframes cert-left { from { transform: translateX(0); } to { transform: translateX(calc(-50% - .625rem)); } }
-  @keyframes cert-right { from { transform: translateX(calc(-50% - .625rem)); } to { transform: translateX(0); } }
+  /* Sertifikat: marquee 2 baris tanpa henti.
+     JS mengisi --loop (lebar 1 set kartu) & --dur, lalu menggandakan kartu seperlunya. */
+  .cert-track { animation: cert-left var(--dur, 30s) linear infinite; }
+  .cert-track.to-right { animation-name: cert-right; }
+  .cert-marquee.is-offscreen .cert-track { animation-play-state: paused; }
+  @keyframes cert-left { from { transform: translateX(0); } to { transform: translateX(calc(var(--loop, 0px) * -1)); } }
+  @keyframes cert-right { from { transform: translateX(calc(var(--loop, 0px) * -1)); } to { transform: translateX(0); } }
   .cert-slide {
     width: 300px;
     flex-shrink: 0;

@@ -218,88 +218,96 @@
           </div>
         </div>
 
-        <!-- ----- Panel: Sertifikat ----- -->
+        <!-- ----- Panel: Sertifikat -----
+             Kiri: daftar sertifikat (klik untuk memilih) | Kanan: detail sertifikat terpilih.
+             Data detail diambil dari atribut data-* di tiap kartu. -->
         <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
           <div class="about-split">
             <div class="about-main">
               <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
               <div class="about-text">
                 <p class="about-lead">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
-                <p>Setiap sertifikat bisa diverifikasi langsung melalui tautan resmi CodePolitan.</p>
+                <p>Pilih sertifikat untuk melihat detail dan tautan verifikasinya.</p>
               </div>
-              <!-- data-sync: grid gambar di kanan ikut berganti halaman -->
-              <ol class="card-grid" data-paginate data-per-page="4" data-sync="cert-photos">
-                <li class="journey-card">
+              <ol class="card-grid" data-paginate data-per-page="4" id="cert-list">
+                <li class="journey-card cert-item is-selected"
+                    data-img="assets/img/certificates/cp-ajax-web-api.jpg" data-date="15 Mei 2024" data-title="Belajar AJAX dan Web API"
+                    data-desc="Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API." data-code="5AOSWKX" data-until="15 Mei 2027">
                   <div class="journey-top">
                     <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
                     <span class="journey-date">15 Mei 2024</span>
                   </div>
-                  <h4>Belajar AJAX dan Web API</h4>
+                  <h4><button type="button" class="cert-select" aria-pressed="true" aria-controls="cert-detail">Belajar AJAX dan Web API</button></h4>
                   <p class="journey-org">CodePolitan · Kelas Online</p>
-                  <div class="cert-links">
-                    <a href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
-                    <span>Berlaku s.d. 15 Mei 2027</span>
-                  </div>
                 </li>
-                <li class="journey-card">
+                <li class="journey-card cert-item"
+                    data-img="assets/img/certificates/cp-javascript-async.jpg" data-date="13 Mei 2024" data-title="Belajar JavaScript Asynchronous"
+                    data-desc="Konsep asynchronous di JavaScript: callback, Promise, dan async/await." data-code="HQ8YLNK" data-until="13 Mei 2027">
                   <div class="journey-top">
                     <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
                     <span class="journey-date">13 Mei 2024</span>
                   </div>
-                  <h4>Belajar JavaScript Asynchronous</h4>
+                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar JavaScript Asynchronous</button></h4>
                   <p class="journey-org">CodePolitan · Kelas Online</p>
-                  <div class="cert-links">
-                    <a href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener">Verifikasi ↗</a>
-                    <span>Berlaku s.d. 13 Mei 2027</span>
-                  </div>
                 </li>
-                <li class="journey-card">
+                <li class="journey-card cert-item"
+                    data-img="assets/img/certificates/cp-dasar-css.jpg" data-date="20 Februari 2024" data-title="Belajar Dasar CSS"
+                    data-desc="Dasar styling halaman web dengan CSS." data-code="JK7VFHV" data-until="19 Februari 2027">
                   <div class="journey-top">
                     <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
                     <span class="journey-date">20 Februari 2024</span>
                   </div>
-                  <h4>Belajar Dasar CSS</h4>
+                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar Dasar CSS</button></h4>
                   <p class="journey-org">CodePolitan · Kelas Online</p>
-                  <div class="cert-links">
-                    <a href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener">Verifikasi ↗</a>
-                    <span>Berlaku s.d. 19 Februari 2027</span>
-                  </div>
                 </li>
-                <li class="journey-card">
+                <li class="journey-card cert-item"
+                    data-img="assets/img/certificates/cp-algoritma-dasar.jpg" data-date="15 Februari 2024" data-title="Algoritma dan Pemrograman Dasar"
+                    data-desc="Fondasi logika pemrograman dan algoritma." data-code="2ZI0RQP" data-until="14 Februari 2027">
                   <div class="journey-top">
                     <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
                     <span class="journey-date">15 Februari 2024</span>
                   </div>
-                  <h4>Algoritma dan Pemrograman Dasar</h4>
+                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Algoritma dan Pemrograman Dasar</button></h4>
                   <p class="journey-org">CodePolitan · Kelas Online</p>
-                  <div class="cert-links">
-                    <a href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener">Verifikasi ↗</a>
-                    <span>Berlaku s.d. 14 Februari 2027</span>
-                  </div>
                 </li>
-                <li class="journey-card">
+                <li class="journey-card cert-item"
+                    data-img="assets/img/certificates/cp-terminal-cmd.jpg" data-date="15 Februari 2024" data-title="Belajar Menggunakan Terminal atau CMD untuk Development"
+                    data-desc="Menggunakan terminal/CMD untuk alur kerja development sehari-hari." data-code="BT2D9M5" data-until="14 Februari 2027">
                   <div class="journey-top">
                     <span class="journey-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
                     <span class="journey-date">15 Februari 2024</span>
                   </div>
-                  <h4>Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                  <h4><button type="button" class="cert-select" aria-pressed="false" aria-controls="cert-detail">Belajar Menggunakan Terminal atau CMD untuk Development</button></h4>
                   <p class="journey-org">CodePolitan · Kelas Online</p>
-                  <div class="cert-links">
-                    <a href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener">Verifikasi ↗</a>
-                    <span>Berlaku s.d. 14 Februari 2027</span>
-                  </div>
                 </li>
               </ol>
             </div>
 
-            <!-- Gambar sertifikat: assets/img/certificates/ (landscape, lebar 1400px) -->
-            <ul class="photo-grid" id="cert-photos" aria-label="Gambar sertifikat">
-              <li class="photo-tile photo-tile--contain"><a href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar AJAX dan Web API"><img src="assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" /><span>AJAX &amp; Web API</span></a></li>
-              <li class="photo-tile photo-tile--contain"><a href="assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar JavaScript Asynchronous"><img src="assets/img/certificates/cp-javascript-async.jpg" alt="Sertifikat CodePolitan: Belajar JavaScript Asynchronous" loading="lazy" /><span>JavaScript Async</span></a></li>
-              <li class="photo-tile photo-tile--contain"><a href="assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Dasar CSS"><img src="assets/img/certificates/cp-dasar-css.jpg" alt="Sertifikat CodePolitan: Belajar Dasar CSS" loading="lazy" /><span>Dasar CSS</span></a></li>
-              <li class="photo-tile photo-tile--contain"><a href="assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Algoritma dan Pemrograman Dasar"><img src="assets/img/certificates/cp-algoritma-dasar.jpg" alt="Sertifikat CodePolitan: Algoritma dan Pemrograman Dasar" loading="lazy" /><span>Algoritma</span></a></li>
-              <li class="photo-tile photo-tile--contain"><a href="assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Menggunakan Terminal atau CMD untuk Development"><img src="assets/img/certificates/cp-terminal-cmd.jpg" alt="Sertifikat CodePolitan: Belajar Menggunakan Terminal atau CMD untuk Development" loading="lazy" /><span>Terminal / CMD</span></a></li>
-            </ul>
+            <!-- Detail sertifikat terpilih -->
+            <article class="cert-detail" id="cert-detail" aria-live="polite">
+              <a class="cert-detail-img" id="cert-detail-link" href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat ukuran penuh">
+                <img id="cert-detail-img" src="assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+              </a>
+              <div class="cert-detail-body" id="cert-detail-body">
+                <div class="cert-detail-meta">
+                  <span class="journey-date" id="cert-detail-date">15 Mei 2024</span>
+                  <span class="cert-detail-count mono" id="cert-detail-count">01 / 05</span>
+                </div>
+                <h4 id="cert-detail-title">Belajar AJAX dan Web API</h4>
+                <p class="journey-org">CodePolitan · Kelas Online</p>
+                <p class="cert-detail-desc" id="cert-detail-desc">Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API.</p>
+                <dl class="cert-detail-info">
+                  <div><dt>Penerbit</dt><dd>CodePolitan</dd></div>
+                  <div><dt>Kode</dt><dd class="mono" id="cert-detail-code">5AOSWKX</dd></div>
+                  <div><dt>Berlaku s.d.</dt><dd id="cert-detail-until">15 Mei 2027</dd></div>
+                </dl>
+                <div class="cert-detail-actions">
+                  <a class="btn btn-sm btn-primary" id="cert-detail-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
+                  <a class="btn btn-sm btn-ghost" id="cert-detail-full" href="assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener">Lihat ukuran penuh</a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
 

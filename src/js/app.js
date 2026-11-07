@@ -54,6 +54,34 @@
     });
   });
 
+  /* ---------- Skills: spotlight & tilt 3D ----------
+     Posisi kursor dikirim ke SEMUA kartu agar tepi kartu tetangga ikut
+     menyala; kartu yang di-hover juga miring mengikuti kursor. */
+  var spotGrid = document.querySelector('.spot-grid');
+  if (spotGrid) {
+    var spotCards = Array.prototype.slice.call(spotGrid.querySelectorAll('.spot-card'));
+    var canTilt = !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    spotGrid.addEventListener('pointermove', function (e) {
+      spotCards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      if (!canTilt) return;
+      var card = e.target.closest('.spot-card');
+      spotCards.forEach(function (c) {
+        if (c !== card) { c.style.transform = ''; return; }
+        var r = c.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        c.style.transform = 'perspective(900px) rotateX(' + (-y * 6) + 'deg) rotateY(' + (x * 8) + 'deg) translateY(-4px)';
+      });
+    });
+    spotGrid.addEventListener('pointerleave', function () {
+      spotCards.forEach(function (c) { c.style.transform = ''; });
+    });
+  }
+
   /* ---------- Tema terang/gelap ---------- */
   var themeToggle = document.getElementById('theme-toggle');
   themeToggle.addEventListener('click', function () {

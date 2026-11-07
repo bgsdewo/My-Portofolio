@@ -241,116 +241,6 @@
     form.reset();
   });
 
-  /* ---------- Galeri foto otomatis (satu per tab di About) ----------
-     Galeri di tab yang tersembunyi otomatis ter-pause (tidak terlihat). */
-  var galleries = [];
-  document.querySelectorAll('.gallery').forEach(function (gallery) {
-    var DURATION = 4500; // ms per foto
-    var slides = gallery.querySelectorAll('.slide');
-    var dotsWrap = gallery.querySelector('.gallery-dots');
-    var countEl = gallery.querySelector('.gallery-count');
-    var current = 0;
-    var timer = null;
-    var startedAt = 0;
-    var remaining = DURATION;
-    var reasons = {}; // alasan pause: hover, focus, offscreen, hidden, motion
-
-    gallery.style.setProperty('--slide-ms', DURATION + 'ms');
-
-    var dots = Array.prototype.map.call(slides, function (slide, i) {
-      var dot = document.createElement('button');
-      dot.className = 'gallery-dot';
-      dot.setAttribute('aria-label', 'Foto ' + (i + 1));
-      dot.innerHTML = '<span></span>';
-      dot.addEventListener('click', function () { go(i); });
-      dotsWrap.appendChild(dot);
-      return dot;
-    });
-
-    function isPaused() { return Object.keys(reasons).some(function (k) { return reasons[k]; }); }
-
-    function schedule() {
-      clearTimeout(timer);
-      if (isPaused() || slides.length < 2) return;
-      startedAt = Date.now();
-      timer = setTimeout(function () { go(current + 1); }, remaining);
-    }
-
-    function setPause(reason, on) {
-      var was = isPaused();
-      reasons[reason] = on;
-      var now = isPaused();
-      gallery.classList.toggle('paused', now);
-      if (now && !was) {
-        clearTimeout(timer);
-        remaining = Math.max(remaining - (Date.now() - startedAt), 0);
-      } else if (!now && was) {
-        schedule();
-      }
-    }
-
-    function go(index) {
-      current = (index + slides.length) % slides.length;
-      slides.forEach(function (s, i) {
-        var active = i === current;
-        s.classList.toggle('active', active);
-        s.setAttribute('aria-hidden', String(!active));
-      });
-      dots.forEach(function (d, i) {
-        d.classList.remove('active');
-        d.classList.toggle('done', i < current);
-        d.setAttribute('aria-current', i === current ? 'true' : 'false');
-      });
-      void dotsWrap.offsetWidth; // restart animasi progress
-      dots[current].classList.add('active');
-      if (reasons.motion) dots[current].classList.add('done');
-      countEl.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
-      remaining = DURATION;
-      schedule();
-    }
-
-    gallery.querySelector('.prev').addEventListener('click', function () { go(current - 1); });
-    gallery.querySelector('.next').addEventListener('click', function () { go(current + 1); });
-
-    // Pause saat di-hover / difokus, lanjut saat ditinggal
-    gallery.addEventListener('mouseenter', function () { setPause('hover', true); });
-    gallery.addEventListener('mouseleave', function () { setPause('hover', false); });
-    // Fokus hanya mem-pause bila dari keyboard (klik tombol tidak membuat galeri berhenti)
-    gallery.addEventListener('focusin', function (e) {
-      if (e.target.matches(':focus-visible')) setPause('focus', true);
-    });
-    gallery.addEventListener('focusout', function () { setPause('focus', false); });
-    gallery.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') go(current + 1);
-      if (e.key === 'ArrowLeft') go(current - 1);
-    });
-
-    // Geser (swipe) di HP
-    var startX = null;
-    var track = gallery.querySelector('.gallery-track');
-    track.addEventListener('pointerdown', function (e) { startX = e.clientX; });
-    track.addEventListener('pointerup', function (e) {
-      if (startX === null) return;
-      var dx = e.clientX - startX;
-      startX = null;
-      if (Math.abs(dx) > 40) go(current + (dx < 0 ? 1 : -1));
-    });
-
-    // Hemat: berhenti saat tidak terlihat atau tab disembunyikan
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        setPause('offscreen', !entries[0].isIntersecting);
-      }, { threshold: 0.25 }).observe(gallery);
-    }
-    document.addEventListener('visibilitychange', function () { setPause('hidden', document.hidden); });
-
-    // Pengguna yang memilih "reduce motion": tidak autoplay, navigasi manual saja
-    if (reduceMotion) reasons.motion = true;
-
-    go(0);
-    galleries.push({ el: gallery, reset: function () { go(0); } });
-  });
-
   /* ---------- Pagination grid kartu di About ----------
      Jumlah kartu per halaman diatur lewat atribut di HTML:
      data-per-page (desktop/tablet) dan data-per-page-sm (HP, < 640px). */
@@ -358,6 +248,9 @@
 
   document.querySelectorAll('[data-paginate]').forEach(function (list) {
     var items = Array.prototype.slice.call(list.children);
+    // data-sync="id": daftar lain (mis. gambar sertifikat) ikut berganti halaman
+    var synced = list.getAttribute('data-sync') ? document.getElementById(list.getAttribute('data-sync')) : null;
+    var syncItems = synced ? Array.prototype.slice.call(synced.children) : [];
     var perPage, pages, page, pager, info, prev, next, nums;
 
     function makeBtn(parent, html, label, onClick) {
@@ -381,6 +274,7 @@
 
       if (pages < 2) { // semua muat di satu halaman
         items.forEach(function (item) { item.classList.remove('is-hidden'); });
+        syncItems.forEach(function (item) { item.classList.remove('is-hidden'); });
         return;
       }
 
@@ -413,6 +307,7 @@
       var start = page * perPage;
       var end = Math.min(start + perPage, items.length);
       items.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
+      syncItems.forEach(function (item, i) { item.classList.toggle('is-hidden', i < start || i >= end); });
       nums.forEach(function (b, i) {
         if (i === page) b.setAttribute('aria-current', 'page');
         else b.removeAttribute('aria-current');
@@ -424,6 +319,7 @@
         list.classList.remove('page-in');
         void list.offsetWidth;
         list.classList.add('page-in');
+        if (synced) { synced.classList.remove('page-in'); void synced.offsetWidth; synced.classList.add('page-in'); }
         // Jaga agar awal daftar tetap terlihat setelah pindah halaman
         var top = list.getBoundingClientRect().top;
         var navH = document.getElementById('navbar').offsetHeight;
@@ -455,10 +351,6 @@
         panel.hidden = !active;
         panel.classList.toggle('active', active);
         if (active) indicator.style.transform = 'translateX(' + i * 100 + '%)';
-      });
-      // Mulai galeri di tab yang baru dibuka dari foto pertama
-      galleries.forEach(function (g) {
-        if (document.getElementById(tab.getAttribute('aria-controls')).contains(g.el)) g.reset();
       });
       if (focus) tab.focus();
     }

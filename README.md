@@ -49,9 +49,9 @@ npx serve .
 | Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `assets/js/main.js` |
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Bio (masih lorem ipsum) | Section `#about` di `index.html` |
-| Foto profil | Simpan di `assets/img/foto.jpg`, lalu ganti `.photo-placeholder` dengan `<img>` |
+| Foto profil (rasio 4:5, mis. 800×1000) | Simpan di `assets/img/foto.jpg`, lalu ganti `.photo-placeholder` dengan `<img src="assets/img/foto.jpg" alt="Foto Bagus Sadewo">` |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
-| Pengalaman & pendidikan | Section `#experience` di `index.html` |
+| Pendidikan, pengalaman & sertifikat | Tab di section `#about` (`#panel-edu`, `#panel-exp`, `#panel-cert`) |
 | Warna aksen | Variabel `--accent` di `assets/css/style.css` |
 
 ## Deploy gratis

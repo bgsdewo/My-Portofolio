@@ -88,7 +88,7 @@ npm run preview
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Deskripsi tab (masih lorem ipsum) | Section `#about` di `index.html` |
 | Foto tab Pendidikan / Pengalaman | Simpan di `public/assets/img/gallery/`, lalu ganti `src`, `alt` & label di `<ul class="photo-grid …">` |
-| Sertifikat | Gambar di `public/assets/img/certificates/`. Di `#panel-cert` ada 2 baris `<ul class="cert-track">`; salin satu `<li class="cert-slide">` ke tiap baris (dua kali per baris: bagian asli & salinan `aria-hidden`) lalu ganti gambar, tanggal, judul & link verifikasi |
+| Sertifikat | Gambar di `public/assets/img/certificates/`. Di `#panel-cert` ada 2 baris `<ul class="cert-track">` (atas: 1–3, bawah: 4–5). Salin satu `<li class="cert-slide">` ke baris yang diinginkan lalu ganti gambar, tanggal, judul & link verifikasi — penggandaan untuk loop dilakukan otomatis oleh JS. Kecepatan: `SPEED` di `src/js/app.js` |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
 | Jumlah kartu per halaman | Atribut `data-per-page` / `data-per-page-sm` pada `<ol class="card-grid …">` |
 

@@ -75,7 +75,7 @@ npm run preview
 - Responsif (mobile-first), tema gelap/terang
 - Navbar sticky + highlight section aktif
 - Hero 3D interaktif: developer berjalan & naik lift antar lapisan Frontend / Backend / Database dengan balon teks tiap langkah, hover lapisan, parallax mouse & scroll
-- About dengan tab Pendidikan / Pengalaman / Sertifikat, grid foto, pagination kartu, panel detail sertifikat
+- About dengan tab Pendidikan / Pengalaman / Sertifikat, grid foto, pagination kartu, sertifikat bergeser tanpa henti (2 baris berlawanan arah)
 - Skills bento grid: sorotan cahaya mengikuti kursor, kartu miring 3D, logo menyala dengan warna brand
 - Filter proyek, form kontak dengan validasi (membuka aplikasi email via `mailto`)
 - Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`
@@ -88,7 +88,7 @@ npm run preview
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Deskripsi tab (masih lorem ipsum) | Section `#about` di `index.html` |
 | Foto tab Pendidikan / Pengalaman | Simpan di `public/assets/img/gallery/`, lalu ganti `src`, `alt` & label di `<ul class="photo-grid …">` |
-| Sertifikat | Gambar di `public/assets/img/certificates/`, lalu salin satu `<li class="cert-item …">` di `#panel-cert` dan ganti atribut `data-img`, `data-date`, `data-title`, `data-desc`, `data-code` |
+| Sertifikat | Gambar di `public/assets/img/certificates/`. Di `#panel-cert` ada 2 baris `<ul class="cert-track">`; salin satu `<li class="cert-slide">` ke tiap baris (dua kali per baris: bagian asli & salinan `aria-hidden`) lalu ganti gambar, tanggal, judul & link verifikasi |
 | Proyek, link demo & repo | Section `#projects` di `index.html` |
 | Jumlah kartu per halaman | Atribut `data-per-page` / `data-per-page-sm` pada `<ol class="card-grid …">` |
 

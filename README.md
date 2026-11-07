@@ -1,13 +1,24 @@
 # Portofolio — Bagus Sadewo
 
-Website portofolio pribadi sebagai **Full Stack Developer**. Dibuat dengan HTML, CSS, dan JavaScript murni — tanpa build tool, tanpa dependensi.
+Website portofolio pribadi sebagai **Full Stack Developer**. Dibuat dengan HTML, CSS, dan JavaScript — tanpa build tool. Library animasi dimuat dari CDN.
+
+## Tech
+
+| Library | Fungsi |
+| --- | --- |
+| [Three.js](https://threejs.org) | Scene 3D di hero: grafik kontribusi GitHub versi 3D (`assets/js/hero.js`) |
+| [GSAP](https://gsap.com) | Animasi intro, huruf judul, tombol magnetik, cahaya kursor |
+| [Lenis](https://lenis.darkroom.engineering) | Smooth scroll |
+
+Kalau CDN gagal dimuat atau pengunjung mengaktifkan *reduce motion*, halaman tetap tampil normal tanpa efek tersebut.
 
 ## Fitur
 
 - Responsif (mobile-first)
 - Toggle tema gelap/terang (tersimpan di browser, mengikuti preferensi sistem)
 - Navbar sticky + highlight section aktif
-- Animasi halus saat scroll, efek mengetik, counter statistik
+- Hero 3D interaktif: kotak kontribusi naik mengikuti kursor, gelombang, partikel, parallax
+- Animasi halus saat scroll, efek mengetik, counter statistik, marquee tech stack
 - Filter proyek (Full Stack / Frontend / Backend)
 - Form kontak dengan validasi (membuka aplikasi email via `mailto`)
 - Aksesibel: skip link, label ARIA, dukungan `prefers-reduced-motion`

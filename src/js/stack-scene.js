@@ -298,9 +298,10 @@ export function initStackScene(THREE, opts) {
     var ctx = bubble.userData.ctx;
     var light = theme === 'light';
     ctx.clearRect(0, 0, 640, 150);
-    ctx.font = '600 38px "JetBrains Mono", monospace';
+    ctx.font = '600 38px "Inter", system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji"';
     var w = Math.min(ctx.measureText(text).width + 64, 620);
-    var x = (640 - w) / 2;
+    // HP: balon menjorok ke kiri karakter agar tidak terpotong tepi kanan layar
+    var x = isMobile ? Math.max(10, 380 - w) : (640 - w) / 2;
     ctx.fillStyle = light ? 'rgba(255,255,255,.96)' : 'rgba(11,17,32,.92)';
     ctx.strokeStyle = color;
     ctx.lineWidth = 4;
@@ -314,7 +315,7 @@ export function initStackScene(THREE, opts) {
     ctx.fillStyle = light ? '#0f172a' : '#f8fafc';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(text, 320, 56);
+    ctx.fillText(text, x + w / 2, 56);
     bubble.userData.tex.needsUpdate = true;
   }
 
@@ -322,25 +323,25 @@ export function initStackScene(THREE, opts) {
   var SPOT = [{ x: 0, z: 1.25 }, { x: 0, z: 1.25 }, { x: 0, z: 0.95 }];
   var PACKET_COLORS = ['#38bdf8', '#39d353', '#c084fc'];
   var STEPS = [
-    { type: 'act', layer: 0, dur: 1.8, action: 'click', bubble: "klik 'Lihat Proyek'", packet: 0, show: true },
-    { type: 'walk', layer: 0, to: ENTRY, bubble: 'GET /api/projects' },
+    { type: 'act', layer: 0, dur: 1.8, action: 'click', bubble: 'Klik! Mau lihat proyek 👀', packet: 0, show: true },
+    { type: 'walk', layer: 0, to: ENTRY, bubble: 'Otw ke backend dulu~' },
     { type: 'walk', layer: 0, to: ELEV },
     { type: 'ride', from: 0, to: 1, dur: 1.4 },
     { type: 'walk', layer: 1, to: ENTRY },
     { type: 'walk', layer: 1, to: SPOT[1] },
-    { type: 'act', layer: 1, dur: 1.8, action: 'process', bubble: 'memproses request...', packet: 1 },
-    { type: 'walk', layer: 1, to: ENTRY, bubble: 'SELECT * FROM projects' },
+    { type: 'act', layer: 1, dur: 1.8, action: 'process', bubble: 'Bentar, lagi mikir... 🤔', packet: 1 },
+    { type: 'walk', layer: 1, to: ENTRY, bubble: 'Pak DB, minta datanya ya' },
     { type: 'walk', layer: 1, to: ELEV },
     { type: 'ride', from: 1, to: 2, dur: 1.4 },
     { type: 'walk', layer: 2, to: ENTRY },
     { type: 'walk', layer: 2, to: SPOT[2] },
-    { type: 'act', layer: 2, dur: 1.8, action: 'query', bubble: 'query data ✓', packet: 2 },
-    { type: 'walk', layer: 2, to: ENTRY, bubble: '200 OK · JSON' },
+    { type: 'act', layer: 2, dur: 1.8, action: 'query', bubble: 'Nemu! Datanya lengkap ✨', packet: 2 },
+    { type: 'walk', layer: 2, to: ENTRY, bubble: 'Bawa pulang ke frontend' },
     { type: 'walk', layer: 2, to: ELEV },
     { type: 'ride', from: 2, to: 0, dur: 2.2 },
     { type: 'walk', layer: 0, to: ENTRY },
     { type: 'walk', layer: 0, to: SPOT[0] },
-    { type: 'act', layer: 0, dur: 2, action: 'render', bubble: 'tampil di layar ✓', hide: true }
+    { type: 'act', layer: 0, dur: 2, action: 'render', bubble: 'Tadaa! Udah tampil 🎉', hide: true }
   ];
   var WALK_SPEED = 1.5;
   var state = { step: -1, t: 0, dur: 1, from: { x: 0, z: 0 }, layer: 0, y: 0, walkPhase: 0, facing: Math.PI, bubbleText: '', bubbleLayer: 0, packetScale: 0 };
@@ -547,9 +548,12 @@ export function initStackScene(THREE, opts) {
       stack.position.set(visW * 0.17, -0.2, 0);
       stack.scale.setScalar(Math.min(0.9, visW / 26));
     }
-    // Label & balon teks terlalu kecil di HP: sembunyikan
+    // Label lapisan terlalu kecil di HP: sembunyikan
     layers.forEach(function (L) { L.label.visible = !isMobile; });
-    bubble.visible = !isMobile;
+    // Balon teks tetap tampil di HP, diperbesar karena stack diperkecil
+    var bs = isMobile ? 2.6 * Math.min(2.2, 0.9 / stack.scale.x) : 2.6;
+    bubble.scale.set(bs, bs * (150 / 640), 1);
+    if (state.bubbleText) drawBubble(state.bubbleText, LAYERS[state.bubbleLayer].color[theme]);
   }
   resize();
   window.addEventListener('resize', resize);

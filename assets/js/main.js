@@ -241,9 +241,10 @@
     form.reset();
   });
 
-  /* ---------- Galeri foto otomatis (About) ---------- */
-  var gallery = document.getElementById('gallery');
-  if (gallery) {
+  /* ---------- Galeri foto otomatis (satu per tab di About) ----------
+     Galeri di tab yang tersembunyi otomatis ter-pause (tidak terlihat). */
+  var galleries = [];
+  document.querySelectorAll('.gallery').forEach(function (gallery) {
     var DURATION = 4500; // ms per foto
     var slides = gallery.querySelectorAll('.slide');
     var dotsWrap = gallery.querySelector('.gallery-dots');
@@ -347,7 +348,8 @@
     if (reduceMotion) reasons.motion = true;
 
     go(0);
-  }
+    galleries.push({ el: gallery, reset: function () { go(0); } });
+  });
 
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */
   var tabList = document.querySelector('.tabs');
@@ -365,6 +367,10 @@
         panel.hidden = !active;
         panel.classList.toggle('active', active);
         if (active) indicator.style.transform = 'translateX(' + i * 100 + '%)';
+      });
+      // Mulai galeri di tab yang baru dibuka dari foto pertama
+      galleries.forEach(function (g) {
+        if (document.getElementById(tab.getAttribute('aria-controls')).contains(g.el)) g.reset();
       });
       if (focus) tab.focus();
     }

@@ -525,8 +525,24 @@ export function initStackScene(THREE, opts) {
     var visH = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
     var visW = visH * camera.aspect;
     if (isMobile) {
-      stack.position.set(visW * 0.16, -visH * 0.33, 0);
-      stack.scale.setScalar(Math.min(0.44, visW / 18));
+      // HP: letakkan di ruang kosong sebelah kanan tombol CTA + ikon sosial,
+      // dihitung dari posisi elemen sebenarnya agar pas di semua ukuran HP
+      var heroRect = hero.getBoundingClientRect();
+      var cta = hero.querySelector('.hero-cta').getBoundingClientRect();
+      var social = hero.querySelector('.hero-social').getBoundingClientRect();
+      // Lebar wadah = selebar layar; yang diukur tepi kanan tombol/ikon sebenarnya
+      var right = 0;
+      hero.querySelectorAll('.hero-cta > a, .hero-social a').forEach(function (el) {
+        right = Math.max(right, el.getBoundingClientRect().right);
+      });
+      var top = cta.top - heroRect.top - 10;
+      var bottom = social.bottom - heroRect.top + 10;
+      var left = right - heroRect.left + 8;
+      var pxToWorld = visH / h;
+      var cx = (left + w) / 2;
+      var cy = (top + bottom) / 2 - 12;
+      stack.position.set((cx / w - 0.5) * visW, (0.5 - cy / h) * visH, 0);
+      stack.scale.setScalar(Math.min((bottom - top) * pxToWorld / 8.8, (w - left) * pxToWorld / 7, 0.5));
     } else {
       stack.position.set(visW * 0.17, -0.2, 0);
       stack.scale.setScalar(Math.min(0.9, visW / 26));
@@ -537,6 +553,8 @@ export function initStackScene(THREE, opts) {
   }
   resize();
   window.addEventListener('resize', resize);
+  // Hitung ulang setelah animasi intro & font selesai (posisi tombol bisa bergeser)
+  setTimeout(resize, 2600);
 
   /* ---------- Pointer ---------- */
   var raycaster = new THREE.Raycaster();

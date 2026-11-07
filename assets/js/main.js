@@ -380,8 +380,6 @@
       $('cert-detail-date').textContent = d.date;
       $('cert-detail-title').textContent = d.title;
       $('cert-detail-desc').textContent = d.desc;
-      $('cert-detail-code').textContent = d.code;
-      $('cert-detail-until').textContent = d.until;
       $('cert-detail-count').textContent = pad(certItems.indexOf(item) + 1) + ' / ' + pad(certItems.length);
 
       certDetail.classList.remove('swap');

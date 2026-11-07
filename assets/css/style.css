@@ -579,23 +579,75 @@ html.lenis, html.lenis body { height: auto; }
   border-radius: 999px;
 }
 
-/* Gambar yang tidak boleh terpotong (sertifikat): tampil utuh di atas
-   latar gelap bernuansa aksen, jadi tile tetap penuh dan rapi */
-.photo-tile--contain {
-  background:
-    radial-gradient(circle at 25% 15%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
-    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 55%),
-    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 22px 22px,
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 22px 22px,
-    var(--surface-2);
+/* ---- Sertifikat: kartu bisa dipilih + panel detail ---- */
+.cert-item { cursor: pointer; }
+.cert-select {
+  font: inherit;
+  color: inherit;
+  text-align: left;
 }
-.photo-tile--contain img {
-  object-fit: contain;
-  padding: .75rem .75rem 2.6rem;
-  animation: none;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .35));
+.cert-select::after { content: ''; position: absolute; inset: 0; } /* seluruh kartu bisa diklik */
+.cert-select:focus-visible { outline: none; }
+.cert-item:has(.cert-select:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.cert-item.is-selected {
+  border-color: var(--accent);
+  background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--surface);
 }
-.photo-tile--contain:hover img { transform: scale(1.04); }
+.cert-item.is-selected::before { transform: scaleX(1); }
+
+.cert-detail {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.cert-detail-img {
+  position: relative;
+  display: block;
+  aspect-ratio: 1400 / 990;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.cert-detail-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.cert-detail-img:hover img { transform: scale(1.03); }
+.cert-zoom {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(4, 8, 18, .45);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.cert-zoom svg { width: 50px; height: 50px; padding: 12px; border-radius: 50%; color: var(--on-accent); background: var(--accent); }
+.cert-detail-img:hover .cert-zoom,
+.cert-detail-img:focus-visible .cert-zoom { opacity: 1; }
+
+.cert-detail-body { padding: 1.4rem 1.5rem 1.5rem; }
+.cert-detail-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: .8rem; }
+.cert-detail-count { font-size: .78rem; color: var(--text-muted); }
+.cert-detail-body h4 { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.3; color: var(--heading); }
+.cert-detail-desc { color: var(--text-muted); font-size: .95rem; }
+.cert-detail-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin: 1.2rem 0;
+  padding: .9rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.cert-detail-info dt { font-size: .72rem; color: var(--text-muted); }
+.cert-detail-info dd { font-size: .86rem; font-weight: 600; color: var(--heading); }
+.cert-detail-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.cert-detail.swap .cert-detail-img img,
+.cert-detail.swap .cert-detail-body { animation: panelIn .45s var(--ease) both; }
+@media (max-width: 420px) { .cert-detail-info { grid-template-columns: 1fr 1fr; } }
 
 .photo-grid > .is-hidden { display: none; }
 .photo-grid.page-in > :not(.is-hidden) { animation: panelIn .45s var(--ease) both; }
@@ -647,7 +699,8 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 420px) { .tab svg { display: none; } }
 
 .tab-panel.active .about-main { animation: panelIn .6s var(--ease) both; }
-.tab-panel.active .photo-grid { animation: panelIn .6s var(--ease) .1s both; }
+.tab-panel.active .photo-grid,
+.tab-panel.active .cert-detail { animation: panelIn .6s var(--ease) .1s both; }
 
 .panel-title {
   display: flex;
@@ -1039,6 +1092,7 @@ html.lenis, html.lenis body { height: auto; }
   .about-split { align-items: stretch; }
   /* Grid foto setinggi kolom kiri */
   .photo-grid { grid-template-rows: repeat(9, minmax(44px, 1fr)); min-height: 480px; }
+  .cert-detail { position: sticky; top: calc(var(--nav-h) + 2rem); align-self: start; }
   .contact-grid { grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }
   .section { padding: 7rem 0; }
 }

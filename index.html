@@ -214,83 +214,265 @@
         </div>
 
         <!-- ----- Panel: Sertifikat -----
-             Kiri: daftar sertifikat (klik untuk memilih) | Kanan: detail sertifikat terpilih.
-             Data detail diambil dari atribut data-* di tiap kartu. -->
+             Dua baris sertifikat bergeser tanpa henti (baris atas ke kanan,
+             baris bawah ke kiri). Berhenti saat di-hover. Konten tiap baris
+             diduplikasi agar loop mulus. -->
         <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
-          <div class="split-line relative grid items-start gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-20">
-            <div class="panel-main min-w-0">
-              <h3 class="mb-4 flex items-center gap-2.5 font-display text-2xl font-bold text-heading [&>svg]:size-10 [&>svg]:shrink-0 [&>svg]:rounded-xl [&>svg]:bg-accent-soft [&>svg]:p-[9px] [&>svg]:text-accent"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
-              <p class="mb-4 text-lg font-medium text-heading">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
-              <p class="mb-4 text-muted">Pilih sertifikat untuk melihat detail dan tautan verifikasinya.</p>
-              <ol id="cert-list" class="card-grid mt-7 grid gap-4 sm:grid-cols-2" data-paginate data-per-page="4">
-                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent is-selected"
-                    data-img="/assets/img/certificates/cp-ajax-web-api.jpg" data-date="15 Mei 2024" data-title="Belajar AJAX dan Web API" data-desc="Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API." data-code="5AOSWKX">
-                  <div class="mb-4 flex items-center justify-between gap-3">
-                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="date-chip">15 Mei 2024</span>
-                  </div>
-                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="true" aria-controls="cert-detail">Belajar AJAX dan Web API</button></h4>
-                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                </li>
-                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
-                    data-img="/assets/img/certificates/cp-javascript-async.jpg" data-date="13 Mei 2024" data-title="Belajar JavaScript Asynchronous" data-desc="Konsep asynchronous di JavaScript: callback, Promise, dan async/await." data-code="HQ8YLNK">
-                  <div class="mb-4 flex items-center justify-between gap-3">
-                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="date-chip">13 Mei 2024</span>
-                  </div>
-                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar JavaScript Asynchronous</button></h4>
-                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                </li>
-                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
-                    data-img="/assets/img/certificates/cp-dasar-css.jpg" data-date="20 Februari 2024" data-title="Belajar Dasar CSS" data-desc="Dasar styling halaman web dengan CSS." data-code="JK7VFHV">
-                  <div class="mb-4 flex items-center justify-between gap-3">
-                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="date-chip">20 Februari 2024</span>
-                  </div>
-                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar Dasar CSS</button></h4>
-                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                </li>
-                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
-                    data-img="/assets/img/certificates/cp-algoritma-dasar.jpg" data-date="15 Februari 2024" data-title="Algoritma dan Pemrograman Dasar" data-desc="Fondasi logika pemrograman dan algoritma." data-code="2ZI0RQP">
-                  <div class="mb-4 flex items-center justify-between gap-3">
-                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="date-chip">15 Februari 2024</span>
-                  </div>
-                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Algoritma dan Pemrograman Dasar</button></h4>
-                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                </li>
-                <li class="cert-item card-line flex flex-col rounded-[14px] border border-line bg-surface p-[1.35rem] transition duration-300 ease-expo hover:-translate-y-1 hover:border-accent/50 hover:shadow-card cursor-pointer [&.is-selected]:border-accent [&.is-selected]:bg-accent-soft has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-3 has-[:focus-visible]:outline-accent"
-                    data-img="/assets/img/certificates/cp-terminal-cmd.jpg" data-date="15 Februari 2024" data-title="Belajar Menggunakan Terminal atau CMD untuk Development" data-desc="Menggunakan terminal/CMD untuk alur kerja development sehari-hari." data-code="BT2D9M5">
-                  <div class="mb-4 flex items-center justify-between gap-3">
-                    <span class="grid size-[38px] place-items-center rounded-[10px] bg-accent-soft text-accent [&>svg]:size-[19px]"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span>
-                    <span class="date-chip">15 Februari 2024</span>
-                  </div>
-                  <h4 class="font-display text-[1.05rem] leading-snug font-bold text-heading"><button type="button" class="cert-select cursor-pointer text-left after:absolute after:inset-0 focus-visible:outline-none" aria-pressed="false" aria-controls="cert-detail">Belajar Menggunakan Terminal atau CMD untuk Development</button></h4>
-                  <p class="mt-1 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                </li>
-              </ol>
-            </div>
+          <div class="panel-main mx-auto mb-10 max-w-[680px] text-center">
+            <h3 class="mb-4 inline-flex items-center gap-2.5 font-display text-2xl font-bold text-heading [&>svg]:size-10 [&>svg]:shrink-0 [&>svg]:rounded-xl [&>svg]:bg-accent-soft [&>svg]:p-[9px] [&>svg]:text-accent"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
+            <p class="mb-3 text-lg font-medium text-heading">5 kelas online CodePolitan yang saya selesaikan sepanjang 2024 — dari algoritma dasar hingga JavaScript asynchronous dan Web API.</p>
+            <p class="text-muted">Klik sertifikat untuk melihat ukuran penuh, atau ↗ untuk verifikasi.</p>
+          </div>
 
-            <!-- Detail sertifikat terpilih -->
-            <article id="cert-detail" class="panel-side flex flex-col self-start overflow-hidden rounded-[22px] border border-line bg-surface shadow-card lg:sticky lg:top-[calc(68px+2rem)]" aria-live="polite">
-              <a id="cert-detail-link" class="group relative block aspect-[1400/990] overflow-hidden border-b border-line bg-white" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat ukuran penuh">
-                <img id="cert-detail-img" class="swap-item size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
-                <span class="absolute inset-0 grid place-items-center bg-black/45 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true"><svg class="size-[50px] rounded-full bg-accent p-3 text-on-accent" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg></span>
-              </a>
-              <div class="swap-item p-6">
-                <div class="mb-3 flex items-center justify-between">
-                  <span id="cert-detail-date" class="date-chip">15 Mei 2024</span>
-                  <span id="cert-detail-count" class="font-mono text-[.78rem] text-muted">01 / 05</span>
-                </div>
-                <h4 id="cert-detail-title" class="font-display text-[1.3rem] leading-tight font-bold text-heading">Belajar AJAX dan Web API</h4>
-                <p class="mt-1 mb-2.5 text-[.86rem] font-medium text-muted">CodePolitan · Kelas Online</p>
-                <p id="cert-detail-desc" class="text-[.95rem] text-muted">Mengambil dan mengirim data ke server tanpa reload halaman menggunakan AJAX dan Web API.</p>
-                <div class="mt-5 flex flex-wrap gap-2.5">
-                  <a id="cert-detail-verify" class="btn btn-sm btn-primary" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener">Verifikasi ↗</a>
-                  <a id="cert-detail-full" class="btn btn-sm btn-ghost" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener">Lihat ukuran penuh</a>
-                </div>
-              </div>
-            </article>
+          <div class="panel-side mx-[calc(50%-50vw)]">
+            <div class="cert-marquee marquee-mask group overflow-hidden py-3">
+              <ul class="cert-track to-right flex w-max gap-5 group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]">
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar AJAX dan Web API">
+                    <img src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar AJAX dan Web API</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar AJAX dan Web API">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar JavaScript Asynchronous">
+                    <img src="/assets/img/certificates/cp-javascript-async.jpg" alt="Sertifikat CodePolitan: Belajar JavaScript Asynchronous" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">13 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar JavaScript Asynchronous</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar JavaScript Asynchronous">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Dasar CSS">
+                    <img src="/assets/img/certificates/cp-dasar-css.jpg" alt="Sertifikat CodePolitan: Belajar Dasar CSS" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">20 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Dasar CSS</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar Dasar CSS">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Algoritma dan Pemrograman Dasar">
+                    <img src="/assets/img/certificates/cp-algoritma-dasar.jpg" alt="Sertifikat CodePolitan: Algoritma dan Pemrograman Dasar" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Algoritma dan Pemrograman Dasar</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Algoritma dan Pemrograman Dasar">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">
+                    <img src="/assets/img/certificates/cp-terminal-cmd.jpg" alt="Sertifikat CodePolitan: Belajar Menggunakan Terminal atau CMD untuk Development" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar AJAX dan Web API">
+                    <img src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar AJAX dan Web API</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar AJAX dan Web API">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar JavaScript Asynchronous">
+                    <img src="/assets/img/certificates/cp-javascript-async.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">13 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar JavaScript Asynchronous</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar JavaScript Asynchronous">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar Dasar CSS">
+                    <img src="/assets/img/certificates/cp-dasar-css.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">20 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Dasar CSS</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar Dasar CSS">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Algoritma dan Pemrograman Dasar">
+                    <img src="/assets/img/certificates/cp-algoritma-dasar.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Algoritma dan Pemrograman Dasar</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Algoritma dan Pemrograman Dasar">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">
+                    <img src="/assets/img/certificates/cp-terminal-cmd.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">↗</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="cert-marquee marquee-mask group overflow-hidden py-3">
+              <ul class="cert-track to-left flex w-max gap-5 group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]">
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Algoritma dan Pemrograman Dasar">
+                    <img src="/assets/img/certificates/cp-algoritma-dasar.jpg" alt="Sertifikat CodePolitan: Algoritma dan Pemrograman Dasar" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Algoritma dan Pemrograman Dasar</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Algoritma dan Pemrograman Dasar">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">
+                    <img src="/assets/img/certificates/cp-terminal-cmd.jpg" alt="Sertifikat CodePolitan: Belajar Menggunakan Terminal atau CMD untuk Development" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar AJAX dan Web API">
+                    <img src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="Sertifikat CodePolitan: Belajar AJAX dan Web API" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar AJAX dan Web API</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar AJAX dan Web API">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar Dasar CSS">
+                    <img src="/assets/img/certificates/cp-dasar-css.jpg" alt="Sertifikat CodePolitan: Belajar Dasar CSS" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">20 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Dasar CSS</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar Dasar CSS">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener" aria-label="Lihat sertifikat Belajar JavaScript Asynchronous">
+                    <img src="/assets/img/certificates/cp-javascript-async.jpg" alt="Sertifikat CodePolitan: Belajar JavaScript Asynchronous" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">13 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar JavaScript Asynchronous</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener" aria-label="Verifikasi sertifikat Belajar JavaScript Asynchronous">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-algoritma-dasar.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Algoritma dan Pemrograman Dasar">
+                    <img src="/assets/img/certificates/cp-algoritma-dasar.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Algoritma dan Pemrograman Dasar</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/2ZI0RQP" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Algoritma dan Pemrograman Dasar">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-terminal-cmd.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">
+                    <img src="/assets/img/certificates/cp-terminal-cmd.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Menggunakan Terminal atau CMD untuk Development</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/BT2D9M5" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar Menggunakan Terminal atau CMD untuk Development">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-ajax-web-api.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar AJAX dan Web API">
+                    <img src="/assets/img/certificates/cp-ajax-web-api.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">15 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar AJAX dan Web API</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/5AOSWKX" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar AJAX dan Web API">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-dasar-css.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar Dasar CSS">
+                    <img src="/assets/img/certificates/cp-dasar-css.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">20 Februari 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar Dasar CSS</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/JK7VFHV" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar Dasar CSS">↗</a>
+                  </div>
+                </li>
+                <li class="cert-slide" aria-hidden="true">
+                  <a class="cert-slide-img" href="/assets/img/certificates/cp-javascript-async.jpg" target="_blank" rel="noopener" tabindex="-1" aria-label="Lihat sertifikat Belajar JavaScript Asynchronous">
+                    <img src="/assets/img/certificates/cp-javascript-async.jpg" alt="" loading="lazy" />
+                  </a>
+                  <div class="flex items-start justify-between gap-3 p-4">
+                    <div class="min-w-0">
+                      <span class="date-chip">13 Mei 2024</span>
+                      <h4 class="mt-2 line-clamp-2 font-display text-[.95rem] leading-snug font-bold text-heading">Belajar JavaScript Asynchronous</h4>
+                    </div>
+                    <a class="cert-verify" href="https://codepolitan.com/c/HQ8YLNK" target="_blank" rel="noopener" tabindex="-1" aria-label="Verifikasi sertifikat Belajar JavaScript Asynchronous">↗</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 

@@ -428,56 +428,6 @@
     else smallScreen.addListener(onBreakpoint);
   });
 
-  /* ---------- Sertifikat: pilih kartu -> tampilkan detail di kanan ---------- */
-  var certList = document.getElementById('cert-list');
-  var certDetail = document.getElementById('cert-detail');
-  if (certList && certDetail) {
-    var certItems = Array.prototype.slice.call(certList.querySelectorAll('.cert-item'));
-    var $ = function (id) { return document.getElementById(id); };
-    var pad = function (n) { return String(n).padStart(2, '0'); };
-
-    function selectCert(item, userAction) {
-      var d = item.dataset;
-      certItems.forEach(function (it) {
-        var on = it === item;
-        it.classList.toggle('is-selected', on);
-        it.querySelector('.cert-select').setAttribute('aria-pressed', String(on));
-      });
-      $('cert-detail-img').src = d.img;
-      $('cert-detail-img').alt = 'Sertifikat CodePolitan: ' + d.title;
-      $('cert-detail-link').href = d.img;
-      $('cert-detail-full').href = d.img;
-      $('cert-detail-verify').href = 'https://codepolitan.com/c/' + d.code;
-      $('cert-detail-date').textContent = d.date;
-      $('cert-detail-title').textContent = d.title;
-      $('cert-detail-desc').textContent = d.desc;
-      $('cert-detail-count').textContent = pad(certItems.indexOf(item) + 1) + ' / ' + pad(certItems.length);
-
-      certDetail.classList.remove('swap');
-      void certDetail.offsetWidth;
-      certDetail.classList.add('swap');
-
-      // Di HP detail ada di bawah daftar: gulir ke sana setelah memilih
-      if (userAction && smallScreen.matches) {
-        var navH = document.getElementById('navbar').offsetHeight;
-        var y = window.scrollY + certDetail.getBoundingClientRect().top - navH - 16;
-        if (window.lenis) window.lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
-      }
-    }
-
-    certItems.forEach(function (item) {
-      item.querySelector('.cert-select').addEventListener('click', function () { selectCert(item, true); });
-    });
-
-    // Pindah halaman: pilih kartu pertama di halaman itu bila pilihan sebelumnya tersembunyi
-    certList.addEventListener('pagechange', function () {
-      var current = certList.querySelector('.cert-item.is-selected');
-      if (current && !current.classList.contains('is-hidden')) return;
-      var first = certItems.filter(function (it) { return !it.classList.contains('is-hidden'); })[0];
-      if (first) selectCert(first, false);
-    });
-  }
-
   /* ---------- Tabs Pendidikan / Pengalaman / Sertifikat ---------- */
   var tabList = document.querySelector('.tabs');
   if (tabList) {

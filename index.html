@@ -110,135 +110,182 @@
       </div>
     </section>
 
-    <!-- ===== ABOUT (termasuk pendidikan, pengalaman & sertifikat) ===== -->
+    <!-- ===== ABOUT (Pendidikan / Pengalaman / Sertifikat) =====
+         Tiap tab berisi galeri foto, deskripsi, dan timeline sendiri. -->
     <section class="section" id="about">
       <div class="container">
-        <header class="section-head reveal">
-          <span class="section-tag">01. Tentang Saya</span>
-          <h2 class="section-title">Sedikit tentang saya</h2>
-        </header>
+        <div class="about-head">
+          <header class="section-head reveal">
+            <span class="section-tag">01. Tentang Saya</span>
+            <h2 class="section-title">Sedikit tentang saya</h2>
+          </header>
 
-        <div class="about-grid">
-          <!-- Kolom kiri: galeri foto otomatis (sticky di desktop) -->
-          <aside class="about-side reveal">
-            <!-- Ganti foto: simpan di assets/img/gallery/ (rasio 4:5, mis. 800×1000)
-                 lalu ubah src, alt & caption. Tambah/hapus <figure class="slide"> sesuka hati. -->
-            <div class="gallery" id="gallery" role="region" aria-roledescription="carousel" aria-label="Galeri foto">
-              <div class="gallery-track">
-                <figure class="slide active">
-                  <img src="assets/img/gallery/foto-1.svg" alt="Bagus sedang ngoding" />
-                  <figcaption>Ngoding</figcaption>
-                </figure>
-                <figure class="slide">
-                  <img src="assets/img/gallery/foto-2.svg" alt="Bagus di kampus" loading="lazy" />
-                  <figcaption>Kampus</figcaption>
-                </figure>
-                <figure class="slide">
-                  <img src="assets/img/gallery/foto-3.svg" alt="Bagus di acara hackathon" loading="lazy" />
-                  <figcaption>Event</figcaption>
-                </figure>
-                <figure class="slide">
-                  <img src="assets/img/gallery/foto-4.svg" alt="Bagus bersama tim" loading="lazy" />
-                  <figcaption>Tim</figcaption>
-                </figure>
+          <div class="stats reveal">
+            <div class="stat"><strong data-count="10">0</strong><span>Proyek selesai</span></div>
+            <div class="stat"><strong data-count="2">0</strong><span>Tahun belajar</span></div>
+            <div class="stat"><strong data-count="15">0</strong><span>Teknologi</span></div>
+          </div>
+        </div>
+
+        <div class="tabs reveal" role="tablist" aria-label="Tentang saya" id="experience">
+          <button class="tab active" role="tab" id="tab-edu" aria-selected="true" aria-controls="panel-edu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Pendidikan
+          </button>
+          <button class="tab" role="tab" id="tab-exp" aria-selected="false" aria-controls="panel-exp" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Pengalaman
+          </button>
+          <button class="tab" role="tab" id="tab-cert" aria-selected="false" aria-controls="panel-cert" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>
+            Sertifikat
+          </button>
+          <span class="tab-indicator" aria-hidden="true"></span>
+        </div>
+
+        <!-- ----- Panel: Pendidikan ----- -->
+        <div class="tab-panel active" role="tabpanel" id="panel-edu" aria-labelledby="tab-edu">
+          <div class="about-grid">
+            <aside class="about-side">
+              <!-- Foto Pendidikan: simpan di assets/img/gallery/ (rasio 4:5, mis. 800×1000) -->
+              <div class="gallery" role="region" aria-roledescription="carousel" aria-label="Galeri foto pendidikan">
+                <div class="gallery-track">
+                  <figure class="slide active">
+                    <img src="assets/img/gallery/edu-1.svg" alt="Bagus di kampus" />
+                    <figcaption>Kampus</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/gallery/edu-2.svg" alt="Bagus saat kuliah" loading="lazy" />
+                    <figcaption>Kelas</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/gallery/edu-3.svg" alt="Bagus saat wisuda atau kegiatan organisasi" loading="lazy" />
+                    <figcaption>Wisuda</figcaption>
+                  </figure>
+                </div>
+                <button class="gallery-nav prev" aria-label="Foto sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="gallery-nav next" aria-label="Foto berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                <div class="gallery-dots" role="group" aria-label="Pilih foto"></div>
+                <span class="gallery-count mono" aria-live="polite"></span>
               </div>
+            </aside>
 
-              <button class="gallery-nav prev" aria-label="Foto sebelumnya">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-              </button>
-              <button class="gallery-nav next" aria-label="Foto berikutnya">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-              </button>
-
-              <div class="gallery-dots" role="group" aria-label="Pilih foto"></div>
-              <span class="gallery-count mono" aria-live="polite"></span>
-            </div>
-          </aside>
-
-          <!-- Kolom kanan: bio, statistik, perjalanan -->
-          <div class="about-main">
-            <div class="about-text reveal">
-              <p class="about-lead">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-
-            <div class="stats reveal">
-              <div class="stat"><strong data-count="10">0</strong><span>Proyek selesai</span></div>
-              <div class="stat"><strong data-count="2">0</strong><span>Tahun belajar</span></div>
-              <div class="stat"><strong data-count="15">0</strong><span>Teknologi</span></div>
-            </div>
-
-            <div class="journey reveal" id="experience">
-              <div class="tabs" role="tablist" aria-label="Perjalanan">
-                <button class="tab active" role="tab" id="tab-edu" aria-selected="true" aria-controls="panel-edu">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                  Pendidikan
-                </button>
-                <button class="tab" role="tab" id="tab-exp" aria-selected="false" aria-controls="panel-exp" tabindex="-1">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                  Pengalaman
-                </button>
-                <button class="tab" role="tab" id="tab-cert" aria-selected="false" aria-controls="panel-cert" tabindex="-1">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>
-                  Sertifikat
-                </button>
-                <span class="tab-indicator" aria-hidden="true"></span>
+            <div class="about-main">
+              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Perjalanan akademik</h3>
+              <div class="about-text">
+                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan latar belakang pendidikanmu di sini.</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Misalnya: alasan memilih jurusan, mata kuliah favorit, atau organisasi yang diikuti.</p>
               </div>
-
-              <div class="tab-panel active" role="tabpanel" id="panel-edu" aria-labelledby="tab-edu">
-                <ol class="timeline">
-                  <li class="timeline-item">
-                    <span class="timeline-date">2022 — 2026</span>
-                    <h4>S1 Teknik Informatika</h4>
-                    <p class="timeline-org">Nama Universitas</p>
-                    <p>Fokus pada rekayasa perangkat lunak dan pengembangan web. IPK: x.xx</p>
-                  </li>
-                  <li class="timeline-item">
-                    <span class="timeline-date">2019 — 2022</span>
-                    <h4>SMA / SMK — Jurusan</h4>
-                    <p class="timeline-org">Nama Sekolah, Jakarta</p>
-                    <p>Ceritakan singkat pencapaian atau kegiatan yang relevan.</p>
-                  </li>
-                </ol>
-              </div>
-
-              <div class="tab-panel" role="tabpanel" id="panel-exp" aria-labelledby="tab-exp" hidden>
-                <ol class="timeline">
-                  <li class="timeline-item">
-                    <span class="timeline-date">2025 — Sekarang</span>
-                    <h4>Full Stack Developer (Freelance)</h4>
-                    <p class="timeline-org">Remote</p>
-                    <p>Membangun aplikasi web untuk klien UMKM: landing page, sistem kasir, dan dashboard admin.</p>
-                  </li>
-                  <li class="timeline-item">
-                    <span class="timeline-date">2024 — 2025</span>
-                    <h4>Web Developer Intern</h4>
-                    <p class="timeline-org">PT Nama Perusahaan, Jakarta</p>
-                    <p>Mengembangkan fitur internal dengan Laravel &amp; MySQL, serta memperbaiki bug dan performa halaman.</p>
-                  </li>
-                </ol>
-              </div>
-
-              <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
-                <ol class="timeline">
-                  <li class="timeline-item">
-                    <span class="timeline-date">2024</span>
-                    <h4>Full Stack Web Development</h4>
-                    <p class="timeline-org">Nama Platform Kursus</p>
-                    <p>Menyelesaikan kurikulum front-end, back-end, dan deployment.</p>
-                  </li>
-                </ol>
-              </div>
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <span class="timeline-date">2022 — 2026</span>
+                  <h4>S1 Teknik Informatika</h4>
+                  <p class="timeline-org">Nama Universitas</p>
+                  <p>Fokus pada rekayasa perangkat lunak dan pengembangan web. IPK: x.xx</p>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">2019 — 2022</span>
+                  <h4>SMA / SMK — Jurusan</h4>
+                  <p class="timeline-org">Nama Sekolah, Jakarta</p>
+                  <p>Ceritakan singkat pencapaian atau kegiatan yang relevan.</p>
+                </li>
+              </ol>
             </div>
           </div>
         </div>
+
+        <!-- ----- Panel: Pengalaman ----- -->
+        <div class="tab-panel" role="tabpanel" id="panel-exp" aria-labelledby="tab-exp" hidden>
+          <div class="about-grid">
+            <aside class="about-side">
+              <!-- Foto Pengalaman: simpan di assets/img/gallery/ (rasio 4:5, mis. 800×1000) -->
+              <div class="gallery" role="region" aria-roledescription="carousel" aria-label="Galeri foto pengalaman">
+                <div class="gallery-track">
+                  <figure class="slide active">
+                    <img src="assets/img/gallery/exp-1.svg" alt="Bagus sedang ngoding" loading="lazy" />
+                    <figcaption>Ngoding</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/gallery/exp-2.svg" alt="Bagus bersama tim" loading="lazy" />
+                    <figcaption>Tim</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/gallery/exp-3.svg" alt="Bagus di tempat magang" loading="lazy" />
+                    <figcaption>Kantor</figcaption>
+                  </figure>
+                </div>
+                <button class="gallery-nav prev" aria-label="Foto sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="gallery-nav next" aria-label="Foto berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                <div class="gallery-dots" role="group" aria-label="Pilih foto"></div>
+                <span class="gallery-count mono" aria-live="polite"></span>
+              </div>
+            </aside>
+
+            <div class="about-main">
+              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Pengalaman kerja</h3>
+              <div class="about-text">
+                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan pengalaman kerja dan proyek nyata yang pernah kamu tangani.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Misalnya: peran kamu di tim, masalah yang diselesaikan, dan dampaknya.</p>
+              </div>
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <span class="timeline-date">2025 — Sekarang</span>
+                  <h4>Full Stack Developer (Freelance)</h4>
+                  <p class="timeline-org">Remote</p>
+                  <p>Membangun aplikasi web untuk klien UMKM: landing page, sistem kasir, dan dashboard admin.</p>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-date">2024 — 2025</span>
+                  <h4>Web Developer Intern</h4>
+                  <p class="timeline-org">PT Nama Perusahaan, Jakarta</p>
+                  <p>Mengembangkan fitur internal dengan Laravel &amp; MySQL, serta memperbaiki bug dan performa halaman.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- ----- Panel: Sertifikat ----- -->
+        <div class="tab-panel" role="tabpanel" id="panel-cert" aria-labelledby="tab-cert" hidden>
+          <div class="about-grid">
+            <aside class="about-side">
+              <!-- Foto Sertifikat: simpan di assets/img/gallery/ (rasio 4:5, mis. 800×1000) -->
+              <div class="gallery" role="region" aria-roledescription="carousel" aria-label="Galeri foto sertifikat">
+                <div class="gallery-track">
+                  <figure class="slide active">
+                    <img src="assets/img/gallery/cert-1.svg" alt="Sertifikat milik Bagus" loading="lazy" />
+                    <figcaption>Sertifikat</figcaption>
+                  </figure>
+                  <figure class="slide">
+                    <img src="assets/img/gallery/cert-2.svg" alt="Bagus saat mengikuti pelatihan" loading="lazy" />
+                    <figcaption>Workshop</figcaption>
+                  </figure>
+                </div>
+                <button class="gallery-nav prev" aria-label="Foto sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="gallery-nav next" aria-label="Foto berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                <div class="gallery-dots" role="group" aria-label="Pilih foto"></div>
+                <span class="gallery-count mono" aria-live="polite"></span>
+              </div>
+            </aside>
+
+            <div class="about-main">
+              <h3 class="panel-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg> Sertifikat &amp; pelatihan</h3>
+              <div class="about-text">
+                <p class="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ceritakan kursus, bootcamp, atau sertifikasi yang sudah kamu selesaikan.</p>
+                <p>Excepteur sint occaecat cupidatat non proident. Misalnya: skill baru yang didapat dan bagaimana kamu menerapkannya di proyek.</p>
+              </div>
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <span class="timeline-date">2024</span>
+                  <h4>Full Stack Web Development</h4>
+                  <p class="timeline-org">Nama Platform Kursus</p>
+                  <p>Menyelesaikan kurikulum front-end, back-end, dan deployment.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 

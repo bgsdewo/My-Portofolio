@@ -259,7 +259,7 @@
      Tanpa backend: validasi di sisi klien lalu membuka aplikasi email
      dengan isi pesan yang sudah terisi. Ganti CONTACT_EMAIL dengan email kamu,
      atau hubungkan ke layanan seperti Formspree bila ingin tanpa mailto. */
-  var CONTACT_EMAIL = 'email@contoh.com';
+  var CONTACT_EMAIL = 'bgsdewoo20@gmail.com';
   var form = document.getElementById('contact-form');
   var statusEl = document.getElementById('form-status');
 

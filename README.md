@@ -84,7 +84,6 @@ npm run preview
 
 | Apa | Di mana |
 | --- | --- |
-| Email (`email@contoh.com`) | `index.html` & `CONTACT_EMAIL` di `src/js/app.js` |
 | LinkedIn (`linkedin.com/in/username`) | `index.html` |
 | Deskripsi tab (masih lorem ipsum) | Section `#about` di `index.html` |
 | Foto tab Pendidikan / Pengalaman | Simpan di `public/assets/img/gallery/`, lalu ganti `src`, `alt` & label di `<ul class="photo-grid …">` |
